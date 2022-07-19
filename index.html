@@ -1,82 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head class="has-navbar-fixed-top">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rhovas</title>
-    <meta name="description" content="A programming language for API design and enforcement.">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhovas</title>
+  <meta name="description" content="A programming language for API design and enforcement.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
-<body>
-    <nav class="navbar" role="navigation" aria-label="Main Navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="">
-                <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
-            </a>
-            <div class="navbar-burger" aria-label="Main Menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </div>
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-fixed-top" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="">
+      <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
+    </a>
+    <div class="navbar-burger" aria-label="Main Menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="">
+        <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspLearn</span>
+      </a>
+      <a class="navbar-item" href="">
+        <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspDocs</span>
+      </a>
+      <a class="navbar-item" href="">
+        <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspEditor</span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="https://github.com/Rhovas">
+        <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspGitHub</span>
+      </a>
+      <a class="navbar-item" href="https://discord.gg/4Kjt3ZE">
+        <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
+        <span class="is-size-4">&nbspPLD Discord</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-fullheight-with-navbar is-info">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-size-1">Rhovas</h1>
+      <p class="subtitle is-size-3">A programming language for API design and enforcement.</p>
+
+      <div class="message has-text-left" style="margin-top: 60px">
+        <div class="message-header">
+          <p id="example-title"></p>
+          <nav class="level is-mobile">
+            <span class="level-item">
+              <button class="button" onclick="renderExample(example - 1)">
+                <span class="icon is-small">
+                  <i class="fas fa-caret-left"></i>
+                </span>
+              </button>
+            </span>
+            <span id="example-index" class="level-item"></span>
+            <span class="level-item">
+              <button class="button" onclick="renderExample(example + 1)">
+                <span class="icon is-small">
+                  <i class="fas fa-caret-right"></i>
+                </span>
+              </button>
+            </span>
+          </nav>
         </div>
-        <div class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="">
-                    <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
-                    <span class="is-size-4">&nbspLearn</span>
-                </a>
-                <a class="navbar-item" href="">
-                    <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
-                    <span class="is-size-4">&nbspDocs</span>
-                </a>
-                <a class="navbar-item" href="">
-                    <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
-                    <span class="is-size-4">&nbspEditor</span>
-                </a>
-            </div>
-            <div class="navbar-end">
-                <a class="navbar-item" href="https://github.com/Rhovas">
-                    <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
-                    <span class="is-size-4">&nbspGitHub</span>
-                </a>
-                <a class="navbar-item" href="https://discord.gg/4Kjt3ZE">
-                    <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
-                    <span class="is-size-4">&nbspPLD Discord</span>
-                </a>
-            </div>
+        <div id="example-body" class="message-body"></div>
+      </div>
+
+      <div class="columns" style="margin-top: 60px">
+        <div class="column">
+          <span class="title is-size-3">Correct&nbsp</span>
+          <i class="fas fa-2x fa-check"></i>
+          <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
+            Above all, working software needs code to function properly. Rhovas is designed with correctness in mind to
+            minimize issues, ensure edge cases and errors are properly handled, and finally provide reasonable
+            guarantees of correctness.
+          </p>
         </div>
-    </nav>
-    <section class="hero is-fullheight-with-navbar is-info">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title is-size-1">Rhovas</h1>
-                <p class="subtitle is-size-3">A programming language for API design and enforcement.</p>
-                <div class="columns" style="margin-top: 60px">
-                    <div class="column">
-                        <span class="title is-size-3">Correct&nbsp</span>
-                        <i class="fas fa-2x fa-check"></i>
-                        <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
-                            Above all, working software needs code to function properly. Rhovas is designed with correctness in mind to minimize issues, ensure edge cases and errors are properly handled, and finally provide reasonable guarantees of correctness.
-                        </p>
-                    </div>
-                    <div class="column">
-                        <span class="title is-size-3">Maintainable&nbsp</span>
-                        <i class="fas fa-2x fa-clock"></i>
-                        <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
-                            Most languages (and even development processes) rarely consider how software evolves over time. On top of verifying correctness, Rhovas also helps maintain compatibility and encourages the use of good software design practices.
-                        </p>
-                    </div>
-                    <div class="column">
-                        <span class="title is-size-3">Clear & Consistent&nbsp</span>
-                        <i class="fas fa-2x fa-glasses"></i>
-                        <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
-                            The majority of development is reading code, not writing code - especially when debugging. By ensuring consistency with code style and API design, Rhovas makes it easier to read, share, and use code in projects which aids maintainability.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="column">
+          <span class="title is-size-3">Maintainable&nbsp</span>
+          <i class="fas fa-2x fa-clock"></i>
+          <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
+            Most languages (and even development processes) rarely consider how software evolves over time. On top of
+            verifying correctness, Rhovas also helps maintain compatibility and encourages the use of good software
+            design practices.
+          </p>
         </div>
-    </section>
+        <div class="column">
+          <span class="title is-size-3">Clear & Consistent&nbsp</span>
+          <i class="fas fa-2x fa-glasses"></i>
+          <p class="subtitle is-size-5 has-text-justified" style="padding-top: 10px">
+            The majority of development is reading code, not writing code - especially when debugging. By ensuring
+            consistency with code style and API design, Rhovas makes it easier to read, share, and use code in projects
+            which aids maintainability.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </body>
+<div id="examples">
+  <template title="FizzBuzz (Ranges, Lambdas, Pattern Matching)">
+<pre style="background-color: transparent; padding: 0"><code class="has-text-dark">range(<span class="has-text-info">1</span>, <span class="has-text-info">15</span>, <span style="color: hsl(283, 39%, 53%)">:incl</span>).<span class="has-text-link">for</span> {
+    <span class="has-text-link">match</span> ([<span style="color: hsl(283, 39%, 53%)">val</span>.mod(<span class="has-text-info">3</span>), <span style="color: hsl(283, 39%, 53%)">val</span>.mod(<span class="has-text-info">5</span>)]) {
+        [<span class="has-text-info">0</span>, <span class="has-text-info">0</span>]: print(<span class="has-text-success-dark">"FizzBuzz"</span>);
+        [<span class="has-text-info">0</span>, _]: print(<span class="has-text-success-dark">"Fizz"</span>);
+        [_, <span class="has-text-info">0</span>]: print(<span class="has-text-success-dark">"Buzz"</span>);
+        <span class="has-text-link">else</span>: print(<span style="color: hsl(283, 39%, 53%)">val</span>);
+    }
+}
+</code></pre>
+  </template>
+  <template title="Square Root (Functions, Contracts)">
+<pre style="background-color: transparent; padding: 0"><code class="has-text-dark"><span class="has-text-link">func</span> sqrt(<span style="color: hsl(283, 39%, 53%)">num</span>: <span class="has-text-danger">Integer</span>): <span class="has-text-danger">Integer</span> {
+    <span class="has-text-link">require</span> <span style="color: hsl(283, 39%, 53%)">num</span> >= <span class="has-text-info">0</span>;
+    <span class="has-text-grey-light">...</span>
+    <span class="has-text-link">ensure</span> <span style="color: hsl(283, 39%, 53%)">val</span> * <span style="color: hsl(283, 39%, 53%)">val</span> <= <span style="color: hsl(283, 39%, 53%)">num</span>;
+    <span class="has-text-link">ensure</span> (<span style="color: hsl(283, 39%, 53%)">val</span> + 1) * (<span style="color: hsl(283, 39%, 53%)">val</span> + 1) > <span style="color: hsl(283, 39%, 53%)">num</span>;
+}
+
+
+</code></pre>
+  </template>
+  <template title="List (Classes, Mutability)">
+<pre style="background-color: transparent; padding: 0"><code class="has-text-dark"><span class="has-text-link">class</span> <span class="has-text-danger">List</span><<span class="has-text-danger">'T</span>> {
+
+    <span class="has-text-link">func</span> +add(<span style="color: hsl(283, 39%, 53%)">element</span>: <span class="has-text-danger">'T</span>) { <span class="has-text-grey-light">...</span> }
+
+    <span class="has-text-link">func</span> -first(): <span class="has-text-danger">'T?</span> { <span class="has-text-grey-light">...</span> }
+
+}
+
+</code></pre>
+  </template>
+  <template title="Integer Parsing (Error Handling)">
+<pre style="background-color: transparent; padding: 0"><code class="has-text-dark"><span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">input</span> = <span class="has-text-success-dark">"NaN"</span>;
+
+<span class="has-text-link">try</span> {
+    <span class="has-text-link">return</span> <span class="has-text-danger">Integer</span>.parse!(<span style="color: hsl(283, 39%, 53%)">input</span>);
+} <span class="has-text-link">catch</span> (<span style="color: hsl(283, 39%, 53%)">e</span>: <span class="has-text-danger">ParseException</span>) { <span class="has-text-grey-light">...</span> }
+
+<span class="has-text-link">return</span> <span class="has-text-danger">Integer</span>.parse(<span style="color: hsl(283, 39%, 53%)">input</span>) ?: <span class="has-text-grey-light">...</span>;
+
+</code></pre>
+  </template>
+  <template title="Database Query (Embedded DSLs)">
+<pre style="background-color: transparent; padding: 0"><code class="has-text-dark"><span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">language</span> = <span class="has-text-success-dark">"Rhovas"</span>;
+
+<span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">result</span> = <span style="color: hsl(283, 39%, 53%)">db</span>.query(<span class="has-text-danger">#sql {</span>
+  <span class="has-text-link">SELECT</span> * <span class="has-text-link">FROM</span> <span style="color: hsl(283, 39%, 53%)">languages</span>
+  <span class="has-text-link">WHERE</span> <span style="color: hsl(283, 39%, 53%)">name</span> = <span class="has-text-danger">${</span><span style="color: hsl(283, 39%, 53%)">language</span><span class="has-text-danger">}</span>
+<span class="has-text-danger">}</span>);
+
+
+</code></pre>
+  </template>
+</div>
 </html>
+<script>
+  let example = 0;
+  const examples = document.getElementById("examples");
+  const exampleTitle = document.getElementById("example-title");
+  const exampleIndex = document.getElementById("example-index");
+  const exampleBody = document.getElementById("example-body");
+
+  function renderExample(index) {
+    example = index % examples.children.length;
+    const template = examples.children[example];
+    exampleTitle.innerText = template.attributes["title"].value;
+    exampleIndex.innerText = `${example + 1}/${examples.children.length}`;
+    exampleBody.innerHTML = template.innerHTML;
+  }
+
+  renderExample(example);
+</script>
