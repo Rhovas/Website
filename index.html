@@ -9,28 +9,28 @@
   <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 </head>
 <body class="has-navbar-fixed-top">
-<nav class="navbar is-fixed-top" role="navigation" aria-label="Main Navigation">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="">
+    <a class="navbar-item" href="./">
       <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
     </a>
-    <div class="navbar-burger" aria-label="Main Menu" aria-expanded="false">
+    <div id="navbar-burger" class="navbar-burger" aria-label="Main Menu" aria-expanded="false" onclick="toggleNavbar()">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </div>
   </div>
-  <div class="navbar-menu">
+  <div id="navbar-menu" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="">
+      <a class="navbar-item" href="./learn">
         <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
         <span class="is-size-4">&nbspLearn</span>
       </a>
-      <a class="navbar-item" href="">
+      <a class="navbar-item" href="./docs">
         <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
         <span class="is-size-4">&nbspDocs</span>
       </a>
-      <a class="navbar-item" href="">
+      <a class="navbar-item" href="./editor">
         <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
         <span class="is-size-4">&nbspEditor</span>
       </a>
@@ -40,14 +40,14 @@
         <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
         <span class="is-size-4">&nbspGitHub</span>
       </a>
-      <a class="navbar-item" href="https://discord.gg/4Kjt3ZE">
+      <a class="navbar-item" href="https://discord.gg/gm96xd8">
         <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
-        <span class="is-size-4">&nbspPLD Discord</span>
+        <span class="is-size-4">&nbspDiscord</span>
       </a>
     </div>
   </div>
 </nav>
-<section class="hero is-fullheight-with-navbar is-info">
+<section class="hero is-info is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container has-text-centered" style="width: 100%">
       <h1 class="title is-size-1">Rhovas</h1>
@@ -104,7 +104,7 @@
           <p class="subtitle is-size-5 has-text-justified-desktop" style="padding-top: 10px">
             There is a trend for languages to either prioritize performance or largely ignore it, relying on hardware to
             fill in the gaps. Performance plays a major role in the design and usability of software, and therefore
-            Rhovas include it to ensure that decisions affecting maintainability or correctness are also balanced with
+            Rhovas includes it to ensure that decisions affecting maintainability or correctness are also balanced with
             real-world performance requirements.
           </p>
         </div>
@@ -171,6 +171,15 @@
   </template>
 </div>
 </html>
+<script>
+  const navbarBurger = document.getElementById("navbar-burger")
+  const navbarMenu = document.getElementById("navbar-menu")
+
+  function toggleNavbar() {
+    navbarBurger.classList.toggle("is-active")
+    navbarMenu.classList.toggle("is-active")
+  }
+</script>
 <script>
   let example = 0;
   const examples = document.getElementById("examples");
