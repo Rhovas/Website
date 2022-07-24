@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="has-navbar-fixed-top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhovas</title>
+  <meta name="description" content="A programming language for API design and enforcement.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="../">
+      <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
+    </a>
+    <div id="navbar-burger" class="navbar-burger" aria-label="Main Menu" aria-expanded="false" onclick="toggleNavbar()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="../learn">
+        <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspLearn</span>
+      </a>
+      <a class="navbar-item" href="../docs">
+        <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspDocs</span>
+      </a>
+      <a class="navbar-item" href="../editor">
+        <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspEditor</span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="https://github.com/Rhovas">
+        <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspGitHub</span>
+      </a>
+      <a class="navbar-item" href="https://discord.gg/gm96xd8">
+        <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
+        <span class="is-size-4">&nbspDiscord</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" style="align-items: normal">
+    <div class="container has-text-dark">
+      <div class="columns is-centered">
+        <div class="column is-narrow is-gapless">
+          <nav class="menu has-text-centered-mobile">
+            <p class="menu-label">Rhovas</p>
+            <ul class="menu-list">
+              <li><a href="./">Overview</a></li>
+              <li><a href="./motivation.html">Motivation</a></li>
+              <li><a href="./motivation.html">Roadmap</a></li>
+            </ul>
+            <p class="menu-label">Language Tour</p>
+            <ul class="menu-list">
+              <li><a href="./tour">Overview</a></li>
+            </ul>
+            <p class="menu-label">Tutorials</p>
+            <ul class="menu-list">
+              <li><a>Coming Soon...</a></li>
+            </ul>
+            <p class="menu-label">Meta</p>
+            <ul class="menu-list">
+              <li><a href="./history.html">History</a></li>
+              <li><a href="./research.html">Research</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="column" style="max-width: 768px">
+          <div class="notification">
+            <p>These articles are for developers to learn the high-level
+              concepts of Rhovas, such as motivation and key features. For
+              detailed documentation see the <a href="/docs">Docs</a>
+              pages instead.</p>
+          </div>
+          <article class="content">
+            <div class="level">
+              <h1 class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="/learn">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Rhovas</span>
+              </h1>
+            </div>
+            <p>Welcome! Rhovas is a programming language intended for API design and enforcement. Using Rhovas,
+              developers can better express the contracts and intention of their code to help create maintainable,
+              correct, and performant software.</p>
+            <p>This page provides a quick overview of the key concepts driving the language. For more details, see
+              also:</p>
+            <ul>
+              <li><a href="./motivation.html">Motivation</a>: Why is Rhovas being created?</li>
+              <li><a href="./tour">Language Tour</a>: What is Rhovas like to program in?</li>
+              <li><a href="./history.html">History</a>: How did Rhovas start, and what happened along the way?</li>
+            </ul>
+            <div class="level">
+              <h2 id="language-design" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#language-design">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Language Design</span>
+              </h2>
+            </div>
+            <p>Rhovas has three "pillars" of language design goals which are used to evaluate and prioritize design
+              decisions for the language:</p>
+            <ol>
+              <li><strong>Maintainability</strong>: How easily can the software be understood and modified to
+                incorporate bug fixes, new features, or specification changes?</li>
+              <li><strong>Correctness</strong>: Does the software perform the desired task as intended, and how can the
+                intended behavior be documented and tested?</li>
+              <li><strong>Performance</strong>: Is the efficiency of the software sufficient when considering latency,
+                memory, or other resources?</li>
+            </ol>
+            <p>These principles are considered ordered. Software that is performant but not correct does not achieve the
+              desired task, while correct software can continue to improve performance. Similarly, code that is correct
+              but not maintainable may function at one point in time but is not resilient to changes as the software
+              evolves (breaking correctness), while maintainable code can be adapted to become correct. Though this is a
+              simplified approach, the prioritization of these principles has been beneficial for establishing and
+              maintaining a clear vision for Rhovas.</p>
+            <div class="level">
+              <h2 id="apis-dependencies-maintainability" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#apis-dependencies-maintainability">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>APIs, Dependencies, & Maintainability</span>
+              </h2>
+            </div>
+            <p>All software has multiple layers of APIs - dependencies, modules, classes, all the way to functions -
+              specifying how that individual component of the software operates. Modern software has more dependencies
+              than ever before, and even internal projects are split into separate modules or have different developers
+              (such as past you, they're an idiot).</p>
+            <p>These dependencies present enough challenges at any given moment, but when factoring in changes over time
+              they introduce plenty more issues ranging from small bugs to security vulnerabilities to
+              take-down-the-internet-left-pad incidents.</p>
+            <p>Rhovas is one of the few languages to specifically design features for this problem, such as identifying
+              changes that would break API/ABI compatibility. Rhovas also supports functionality for API migrations to
+              make it easier to update dependencies, ranging from renaming functions to transforming larger sections
+              of the codebase through macros (safely, of course!).</p>
+            <div class="level">
+              <h2 id="classification-inspiration" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#classification-inspiration">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Classification/Inspiration</span>
+              </h2>
+            </div>
+            <p>Rhovas can be roughly classified as a <strong>strong</strong>, <strong>statically typed</strong>, and
+              <strong>Object-Oriented</strong> language that <em>prefers</em> <strong>Functional paradigms</strong>
+              (similar to Kotlin). Rhovas <em>prefers</em> structs over classes, declarative over imperative, and pure
+              over mutating; however these features are all available and it is ultimately up to the developer to
+              determine the right level of complexity for the given problem.</p>
+            <p>Furthermore, since Rhovas currently runs on the JVM it is consequently garbage-collected. While some
+              thought has been given to supporting manual memory management eventually, it is not a design goal - there
+              are other languages spending far more effort in this area than Rhovas (such as <a href="https://cone.jondgoodwin.com/">Cone</a>
+              and <a href="https://vale.dev/">Vale</a>) that are better for safe low-level programming <s>which we can
+              steal from later</s>.</p>
+            <p>Rhovas itself was inspired by a wide variety of language, most notably Kotlin/Java as well as C++,
+              JavaScript/TypeScript, Swift, Rust, and Elixir. Specific features were also inspired by
+              <a href="https://www.eiffel.org/doc/eiffel/ET-_Design_by_Contract_%28tm%29%2C_Assertions_and_Exceptions">Eiffel's Design by Contract philosophy</a>,
+              <a href="https://www.ponylang.io/learn/#reference-capabilities">Pony's reference capabilities</a>,
+              <a href="https://joeduffyblog.com/2016/02/07/the-error-model/">Midori's error model</a>, and
+              <a href="https://docs.racket-lang.org/guide/macros.html">Racket's macro system</a>.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+<script>
+  const navbarBurger = document.getElementById("navbar-burger")
+  const navbarMenu = document.getElementById("navbar-menu")
+
+  function toggleNavbar() {
+    navbarBurger.classList.toggle("is-active")
+    navbarMenu.classList.toggle("is-active")
+  }
+</script>
