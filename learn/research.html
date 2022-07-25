@@ -83,77 +83,69 @@
                     <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
                   </a>
                 </span>
-                <span>History</span>
+                <span>Research</span>
               </h1>
             </div>
-            <p>Hi there, I'm <a href="https://willbanders.dev">Blake Anderson</a>  - the creator of Rhovas. Since this
-              page is about the history of Rhovas, I'll take the opportunity to use first-person 'I' here as I go
-              through the story. Let's get started!</p>
+            <p>As part of developing Rhovas, there are a few keys areas of research that have been explored. Some of
+              this is more formalized than others, but they have all been major points of influence for the language in
+              one way or another.</p>
+            <p>Additionally, note that this may not reflect the current state of Rhovas - the language is still evolving
+              and has been for multiple years, so naturally some differences exist as our research improves!</p>
             <div class="level">
-              <h2 id="our-story-begins" class="level-item title" style="margin: 0">
+              <h2 id="mutability" class="level-item title" style="margin: 0">
                 <span class="icon is-medium" style="margin-right: 0.25rem">
-                  <a href="#our-story-begins">
+                  <a href="#mutability">
                     <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
                   </a>
                 </span>
-                <span>Our Story Begins</span>
+                <span>Mutability</span>
               </h2>
             </div>
-            <p>The early motivation for creating a programming language came in December 2017, where I considered making
-              a scripting language for custom behavior in a Minecraft plugin (which I ultimately decided wasn't
-              practical). Later on, after having a plugin crash from mutating a <code class="has-text-dark">List</code>
-              object that was actually an <code class="has-text-dark">ImmutableList</code>, I began considering what a
-              language designed for mutability would look like.</p>
-            <p>It wasn't until Summer 2018 when I started seriously planning out a language. The first notes for Rhovas
-              were from July 11 (considered the anniversary of the language) and early problems I explored were
-              mutability, error handling, and dependent types (not that I knew what they were at the time). The name
-              Rhovas came about a week later, which was chosen due to the file extension (<code class="has-text-dark">.rho</code>,
-              itself from density for fluid dynamics) and had a similar syllabic pattern with Kotlin. The name stuck,
-              helped by its uniqueness for SEO.</p>
+            <p>Most of the early research for Rhovas has been on mutability, which was heavily inspired by
+              <a href="https://www.ponylang.io/learn/#reference-capabilities">Pony's reference capabilities</a> as well
+              as <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">Rust's ownership</a>.
+              reference capabilities and Rust's ownership. This starts as just mutable and immutable permissions, but
+              quickly gets more complex to account for read-only (readable), deeply immutable (constant), and single
+              ownership (unique) permissions.
+            <p>This research was presented at the University of Florida's Undergraduate Research Symposium and adopted
+              into a talk at SwampHacks 2020. Unfortunately, neither of these resources are publicly available at this
+              time; hopefully once the Rhovas implementation is ready for this research in this area will resume.</p>
             <div class="level">
-              <h2 id="the-implementation-revolution" class="level-item title" style="margin: 0">
+              <h2 id="embedded-dsl" class="level-item title" style="margin: 0">
                 <span class="icon is-medium" style="margin-right: 0.25rem">
-                  <a href="#the-implementation-revolution">
+                  <a href="#embedded-dsl">
                     <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
                   </a>
                 </span>
-                <span>The Implementation Revolution</span>
+                <span>Embedded DSLs</span>
               </h2>
             </div>
-            <p>Over the next few years I worked on many iterations of the language and continued to learn more about
-              programming language design/implementation as well as the particular problems I was trying to solve.
-              <a href="https://craftinginterpreters.com">Crafting Interpreters</a> was by far the most helpful resource
-              early on, and I also used <a href="https://www.antlr.org/">ANTLR</a> for a while before opting to
-              handwrite a recursive-descent parser. I also discovered the <a href="https://discord.gg/4Kjt3ZE">r/ProgrammingLanguages Discord</a>,
-              which really helped me when it came to language design.
-            <p>Most of these attempts were built for things like hackathons or my senior project and didn't make it too
-              far. I struggled a lot with managing scope for class instances - especially with inheritance - and never
-              really made much progress with static analysis beyond the basics. I also tried a few times to compile to
-              Java bytecode or just transpile to Java directly, which worked okay for simple features but was overall
-              more complex than I could handle at the time. Nonetheless, each time I made it just a bit further and got
-              <em>really</em> good at writing parsers.</p>
-            <p></p>
+            <p>Modern software often relies on a large number of interconnected languages - a website has a frontend
+              using HTML and JavaScript, multiple backends exist each in their own language with different SQL dialects,
+              and they're all connected in the cloud configured by DSLs like Terraform. The ability to fully embed a DSL
+              into your code (rather than using strings as is often the case) is incredibly useful, but also presents
+              many challenges with parsing and semantic analysis. Rhovas has developed a novel solution for this called
+              syntax macros, which are capable of just about anything an DSL may require.
+            <p>There are two blog posts summarizing this research, <a href="https://blog.willbanders.dev/articles/introducing-syntax-macros">Introducing Syntax Macros</a>
+              (Honor's Thesis) which covers parsing, and <a href="https://blog.willbanders.dev/articles/semantic-analysis-abstractions">Semantic Analysis Abstractions</a>
+              (Master's Thesis) which covers analysis. Links to the full theses are contained within and are relatively
+              approachable as far as academic papers go.</p>
             <div class="level">
-              <h2 id="onward-and-upward" class="level-item title" style="margin: 0">
+              <h2 id="api-compatibility" class="level-item title" style="margin: 0">
                 <span class="icon is-medium" style="margin-right: 0.25rem">
-                  <a href="#onward-and-upward">
+                  <a href="#api-compatibility">
                     <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
                   </a>
                 </span>
-                <span>Onward And Upward</span>
+                <span>API Compatability</span>
               </h2>
             </div>
-            <p>In August 2020 I participated in the Repl.it LangJam (<a href="https://replit.com/talk/share/Rhovas-A-Language-for-API-Design-and-Enforcement/51789">Submission</a>)
-              where I worked full-time to rebuild Rhovas from scratch and tackle a few new ideas that I had never gotten
-              to. The largest one here was embedded DSLs, which has since become a key feature as well as being one of
-              my main <a href="./research">research areas</a>.</p>
-            <p>One year later, the current iteration of the language (and likely last before self-hosting) was started.
-              Unlike the previous attempts, I kept the core language down to just statements and expressions before
-              working on static analysis, and that really helped get through that hurdle. Additionally, I also
-              emphasized strong test coverage which made refactoring much easier when I inevitably ran into issues.</p>
-            <p>Nowadays, Rhovas is really starting to come together and we have a growing community on <a href="https://discord.gg/gm96xd8">Discord</a>
-              too. There's still some core challenges that need to be solved before the language is really usable, but
-              I'm making progress faster than ever and things are definitely looking up!</p>
+            <p>As a language specifically for APIs, API (and ABI) compatability is a major topic of research. The focus
+              here is primarily on identifying what changes constitute API breakages, how we can specify restrictions
+              on these changes, and developing better approaches to managing dependencies.</p>
+            <p>A good overview of this research was presented at PackagingCon 2021, titled
+              <a href="https://pretalx.com/packagingcon-2021/talk/JHYQRP/">Versioning for User-Facing Changes vs API Breakages</a>.
+              A summary, slide deck, and video recording are all available.</p>
           </article>
         </div>
       </div>
