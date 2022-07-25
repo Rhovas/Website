@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="has-navbar-fixed-top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhovas</title>
+  <meta name="description" content="A programming language for API design and enforcement.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="../">
+      <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
+    </a>
+    <div id="navbar-burger" class="navbar-burger" aria-label="Main Menu" aria-expanded="false" onclick="toggleNavbar()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="../learn">
+        <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspLearn</span>
+      </a>
+      <a class="navbar-item" href="../docs">
+        <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspDocs</span>
+      </a>
+      <a class="navbar-item" href="../editor">
+        <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspEditor</span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="https://github.com/Rhovas">
+        <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspGitHub</span>
+      </a>
+      <a class="navbar-item" href="https://discord.gg/gm96xd8">
+        <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
+        <span class="is-size-4">&nbspDiscord</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" style="align-items: normal">
+    <div class="container has-text-dark">
+      <div class="columns is-centered">
+        <div class="column is-narrow is-gapless">
+          <nav class="menu has-text-centered-mobile">
+            <p class="menu-label">Rhovas</p>
+            <ul class="menu-list">
+              <li><a href="./">Overview</a></li>
+              <li><a href="./motivation">Motivation</a></li>
+              <li><a href="./roadmap">Roadmap</a></li>
+            </ul>
+            <p class="menu-label">Language Tour</p>
+            <ul class="menu-list">
+              <li><a href="./tour">Overview</a></li>
+            </ul>
+            <p class="menu-label">Tutorials</p>
+            <ul class="menu-list">
+              <li><a>Coming Soon...</a></li>
+            </ul>
+            <p class="menu-label">Meta</p>
+            <ul class="menu-list">
+              <li><a href="./history">History</a></li>
+              <li><a href="./research">Research</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="column" style="max-width: 768px">
+          <article class="content">
+            <div class="level">
+              <h1 class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="./">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>History</span>
+              </h1>
+            </div>
+            <p>Hi there, I'm <a href="https://willbanders.dev">Blake Anderson</a>  - the creator of Rhovas. Since this
+              page is about the history of Rhovas, I'll take the opportunity to use first-person 'I' here as I go
+              through the story. Let's get started!</p>
+            <div class="level">
+              <h2 id="our-story-begins" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#our-story-begins">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Our Story Begins</span>
+              </h2>
+            </div>
+            <p>The early motivation for creating a programming language came in December 2017, where I considered making
+              a scripting language for custom behavior in a Minecraft plugin (which I ultimately decided wasn't
+              practical). Later on, after having a plugin crash from mutating a <code class="has-text-dark">List</code>
+              object that was actually an <code class="has-text-dark">ImmutableList</code>, I began considering what a
+              language designed for mutability would look like.</p>
+            <p>It wasn't until Summer 2018 when I started seriously planning out a language. The first notes for Rhovas
+              were from July 11 (considered the anniversary of the language) and early problems I explored were
+              mutability, error handling, and dependent types (not that I knew what they were at the time). The name
+              Rhovas came about a week later, which was chosen due to the file extension (<code class="has-text-dark">.rho</code>,
+              itself from density for fluid dynamics) and had a similar syllabic pattern with Kotlin. The name stuck,
+              helped by its uniqueness for SEO.</p>
+            <div class="level">
+              <h2 id="the-implementation-revolution" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#the-implementation-revolution">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>The Implementation Revolution</span>
+              </h2>
+            </div>
+            <p>Over the next few years I worked on many iterations of the language and continued to learn more about
+              programming language design/implementation as well as the particular problems I was trying to solve.
+              <a href="https://craftinginterpreters.com">Crafting Interpreters</a> was by far the most helpful resource
+              early on, and I also used <a href="https://www.antlr.org/">ANTLR</a> for a while before opting to
+              handwrite a recursive-descent parser. I also discovered the <a href="https://discord.gg/4Kjt3ZE">r/ProgrammingLanguages Discord</a>,
+              which really helped me when it came to language design.
+            <p>Most of these attempts were built for things like hackathons or my senior project and didn't make it too
+              far. I struggled a lot with managing scope for class instances - especially with inheritance - and never
+              really made much progress with static analysis beyond the basics. I also tried a few times to compile to
+              Java bytecode or just transpile to Java directly, which worked okay for simple features but was overall
+              more complex than I could handle at the time. Nonetheless, each time I made it just a bit further and got
+              <em>really</em> good at writing parsers.</p>
+            <p></p>
+            <div class="level">
+              <h2 id="onward-and-upward" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#onward-and-upward">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Onward And Upward</span>
+              </h2>
+            </div>
+            <p>In August 2020 I participated in the Repl.it LangJam (<a href="https://replit.com/talk/share/Rhovas-A-Language-for-API-Design-and-Enforcement/51789">Submission</a>)
+              where I worked full-time to rebuild Rhovas from scratch and tackle a few new ideas that I had never gotten
+              to. The largest one here was embedded DSLs, which has since become a key feature as well as being one of
+              my main <a href="./research">research areas</a>.</p>
+            <p>One year later, the current iteration of the language (and likely last before self-hosting) was started.
+              Unlike the previous attempts, I kept the core language down to just statements and expressions before
+              working on static analysis, and that really helped get through that hurdle. Additionally, I also
+              emphasized strong test coverage which made refactoring much easier when I inevitably ran into issues.</p>
+            <p>Nowadays, Rhovas is really starting to come together and we have a growing community on <a href="https://discord.gg/gm96xd8">Discord</a>
+              too. There's still some core challenges that need to be solved before the language is really usable, but
+              I'm making progress faster than ever and things are definitely looking up!</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+<script>
+  const navbarBurger = document.getElementById("navbar-burger")
+  const navbarMenu = document.getElementById("navbar-menu")
+
+  function toggleNavbar() {
+    navbarBurger.classList.toggle("is-active")
+    navbarMenu.classList.toggle("is-active")
+  }
+</script>
