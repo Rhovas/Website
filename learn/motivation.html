@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="has-navbar-fixed-top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhovas</title>
+  <meta name="description" content="A programming language for API design and enforcement.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="../">
+      <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
+    </a>
+    <div id="navbar-burger" class="navbar-burger" aria-label="Main Menu" aria-expanded="false" onclick="toggleNavbar()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="../learn">
+        <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspLearn</span>
+      </a>
+      <a class="navbar-item" href="../docs">
+        <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspDocs</span>
+      </a>
+      <a class="navbar-item" href="../editor">
+        <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspEditor</span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="https://github.com/Rhovas">
+        <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspGitHub</span>
+      </a>
+      <a class="navbar-item" href="https://discord.gg/gm96xd8">
+        <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
+        <span class="is-size-4">&nbspDiscord</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-fullheight-with-navbar">
+  <div class="hero-body" style="align-items: normal">
+    <div class="container has-text-dark">
+      <div class="columns is-centered">
+        <div class="column is-narrow is-gapless">
+          <nav class="menu has-text-centered-mobile">
+            <p class="menu-label">Rhovas</p>
+            <ul class="menu-list">
+              <li><a href="./">Overview</a></li>
+              <li><a href="./motivation">Motivation</a></li>
+              <li><a href="./roadmap">Roadmap</a></li>
+            </ul>
+            <p class="menu-label">Language Tour</p>
+            <ul class="menu-list">
+              <li><a href="./tour">Overview</a></li>
+            </ul>
+            <p class="menu-label">Tutorials</p>
+            <ul class="menu-list">
+              <li><a>Coming Soon...</a></li>
+            </ul>
+            <p class="menu-label">Meta</p>
+            <ul class="menu-list">
+              <li><a href="./history">History</a></li>
+              <li><a href="./research">Research</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="column" style="max-width: 768px">
+          <article class="content">
+            <div class="level">
+              <h1 class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Motivation</span>
+              </h1>
+            </div>
+            <p>Creating a new programming language is a major commitment. Many languages do not have a clear vision or
+              competitive advantage, and even those that do may not become well-used due to factors beyond just the
+              language such as tooling, libraries, and having an active community.</p>
+            <p>This page describes why Rhovas is being created in spite of these challenges, the core problem Rhovas
+              tries to solve, and an overview of key features supporting this goal.</p>
+            <div class="level">
+              <h2 id="so-why" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#so-why">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>So, Why?</span>
+              </h2>
+            </div>
+            <p>There are three main reasons why Rhovas is being created:</p>
+            <ul>
+              <li>Rhovas offers solutions to common software development problems in industry, such as API design and
+                maintainability, that improve the developer experience and quality of the produced software. As such,
+                Rhovas is intended for developing production applications and is not just a personal project, which for
+                example is why we have <a href="./#language-design">defined goals for language design</a>.</li>
+              <li>These solutions offer new, novel ideas to the field of language design that can/should be adopted by
+                other languages. <a href="./research">This research</a> has already had an impact on other languages
+                such as <a href="https://cone.jondgoodwin.com/">Cone</a> and <a href="https://vale.dev/">Vale</a>.</li>
+              <li>Developing a programming language is an excellent learning opportunity for understanding different
+                language principles/features and how they work. Having the ability to use a variety of languages and
+                adapt to the best practices of each is incredibly useful for modern software development.</li>
+            </ul>
+            <p>TLDR; Rhovas is addressing a problem few other languages are and is also developing novel solutions for
+              language design. Though the ultimate goal is for the language to become widely used have a lasting impact,
+              the learning experience alone makes it worthwhile.</p>
+            <div class="level">
+              <h2 id="theory-of-software-apis" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#theory-of-software-apis">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Theory of Software APIs</span>
+              </h2>
+            </div>
+            <p>Within Rhovas, the Theory of Software APIs states the following:</p>
+            <ul>
+              <li>The majority of issues in software development are caused by incorrect assumptions about the API of
+                any given software (including your own).</li>
+            </ul>
+            <p>Many classes of issues fall into this category. We assume that integers do not overflow or indices are in
+              bounds. We assume objects are mutable (or not) and that there's no mutations by another thread. When we
+              don't assume, the behavior is missing in the documentation anyways and we must resort to trial and error
+              to determine how to use it (and hope that behavior doesn't change). The problems that we do stumble across
+              are from either undocumented behavior or 'design quirks' that must be memorized through experience.</p>
+            <p>Consequently, the most impactful solution is to prevent (or at least minimize) incorrect assumptions in
+              the first place through API design, enforcement, and documentation:</p>
+            <ol>
+              <li><strong>API Design</strong>: The better designed a software's API is, the more likely that initial
+                assumptions about the API are correct. Architecture is often the most impactful for this, but also
+                consistency with established conventions (whether libraries or languages) goes a long way.</li>
+              <li><strong>Enforcement</strong>: Being able to enforce the contract of an API at either compile-time
+                (often preferred) or runtime helps prevent unexpected issues and makes the developer aware of the
+                problem as quickly as possible.</li>
+              <li><strong>Documentation</strong>: Written documentation is a necessity for defining a contract and
+                describing the intended behavior of the implementation, especially as many behaviors can't be expressed
+                within the type system alone.</li>
+            </ol>
+            <p>Of these, documentation is by far the most important. All useful work has a degree of inherit complexity
+              that must be reflected by the software, and regardless of any design/enforcement needs to be documented.
+              Any undocumented behavior is, in effect, indistinguishable from a potential bug that requires time to
+              address and may also change in future versions.</p>
+            <p>Additionally, maintainability plays a major role in preserving the accuracy of these systems. Software
+              tends to evolve over time and there is no guarantee that these incremental updates maintain an optimal
+              solution. Therefore, maintainability is critical for making these types of changes and likewise updating
+              the documentation - not to mention breaking changes with dependencies (or dependents). Modularity tends
+              to be the most important factor for managing changes of this scale.</p>
+            <div class="level">
+              <h2 id="competitive-advantage" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#competitive-advantage">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Competitive Advantage</span>
+              </h2>
+            </div>
+            <p>Here are a few key features that Rhovas offers compared to other languages that improve API design and
+              maintainability:</p>
+            <ul>
+              <li><strong>Contracts</strong>: Allows defining and enforcing preconditions, postconditions, and
+                invariants. These act as codified documentation that can be used during compile-time or runtime for
+                enforcement.</li>
+              <li><strong>Mutability</strong>: Defines permissions that restrict the mutability of objects, such as
+                being mutable, immutable, or readable. In addition to preventing unintended mutations, this also
+                naturally guides developers to the intended solution in the API.</li>
+              <li><strong>Error Handling</strong>: Rhovas supports both checked exceptions and result types unified into
+                a single approach. This allows conceptually specifying expected versus unexpected errors, as well as
+                being able to easily identify functions that can throw an exception.</li>
+              <li><strong>API Compatibility</strong>: Changes to the static API are automatically identified to avoid
+                unintended breakages and maintain accurate versioning. Furthermore, dependencies can also provide
+                transformers to automatically migrate code across otherwise breaking changes.
+              <li><strong>Embedded DSLs</strong>: Syntax Macros allow creating DSLs with the proper syntax that are safe
+              with injection and support static analysis. Many software projects use DSLs like regex, HTML, and SQL; and
+              there are cases where creating a custom DSL is the best way to design an API for a given task like
+              mathematics, business-logic definitions, and certain frameworks.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+<script>
+  const navbarBurger = document.getElementById("navbar-burger")
+  const navbarMenu = document.getElementById("navbar-menu")
+
+  function toggleNavbar() {
+    navbarBurger.classList.toggle("is-active")
+    navbarMenu.classList.toggle("is-active")
+  }
+</script>
