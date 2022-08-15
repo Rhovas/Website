@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="has-navbar-fixed-top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhovas</title>
+  <meta name="description" content="A programming language for API design and enforcement.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body class="has-navbar-fixed-top">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="../">
+      <span class="is-size-4 has-text-weight-bold">ρv|Rhovas</span>
+    </a>
+    <div id="navbar-burger" class="navbar-burger" aria-label="Main Menu" aria-expanded="false" onclick="toggleNavbar()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="../../learn">
+        <i class="fas fa-lg fa-rocket" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspLearn</span>
+      </a>
+      <a class="navbar-item" href="../../docs">
+        <i class="fas fa-lg fa-book" style="margin-top: 3px"></i>
+        <span class="is-size-4">&nbspDocs</span>
+      </a>
+      <a class="navbar-item" href="../../editor">
+        <i class="fas fa-lg fa-code" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspEditor</span>
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="https://github.com/Rhovas">
+        <i class="fab fa-lg fa-github" style="margin-top: 2px"></i>
+        <span class="is-size-4">&nbspGitHub</span>
+      </a>
+      <a class="navbar-item" href="https://discord.gg/gm96xd8">
+        <i class="fab fa-lg fa-discord" style="margin-top: 4px"></i>
+        <span class="is-size-4">&nbspDiscord</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<section class="hero is-fullheight-with-navbar" style="scroll-margin-top: 52px">
+  <div class="hero-body" style="align-items: normal">
+    <div class="container has-text-dark">
+      <div class="columns is-centered">
+        <div class="column is-narrow is-gapless">
+          <nav class="menu has-text-centered-mobile">
+            <p class="menu-label">Rhovas</p>
+            <ul class="menu-list">
+              <li><a href="../">Overview</a></li>
+              <li><a href="../motivation">Motivation</a></li>
+              <li><a href="../roadmap">Roadmap</a></li>
+            </ul>
+            <p class="menu-label">Language Tour</p>
+            <ul class="menu-list">
+              <li><a href="./">Overview</a></li>
+              <li>
+                <a href="#constructs">Constructs</a>
+                <ul>
+                  <li><a href="#literals">Literals</a></li>
+                  <li><a href="#operators">Operators</a></li>
+                  <li><a href="#variables">Variables</a></li>
+                  <li><a href="#functions">Functions</a></li>
+                  <li><a href="#if-else">If/Else</a></li>
+                  <li><a href="#match">Match</a></li>
+                  <li><a href="#for">For</a></li>
+                  <li><a href="#while">While</a></li>
+                  <li><a href="#try-catch-finally">Try/Catch/Finally</a></li>
+                  <li><a href="#with">With</a></li>
+                  <li><a href="#structs">Structs</a></li>
+                  <li><a href="#classes">Classes</a></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="menu-label">Tutorials</p>
+            <ul class="menu-list">
+              <li><a>Coming Soon<span class="has-text-grey-light">...</span></a></li>
+            </ul>
+            <p class="menu-label">Meta</p>
+            <ul class="menu-list">
+              <li><a href="../history">History</a></li>
+              <li><a href="../research">Research</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="column" style="max-width: 768px">
+          <div class="notification">
+            <p>These articles are for developers to learn the high-level
+              concepts of Rhovas, such as motivation and key features. For
+              detailed documentation see the <a href="/docs">Docs</a>
+              pages instead.</p>
+          </div>
+          <article class="content">
+            <div class="level">
+              <h1 class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Language Tour</span>
+              </h1>
+            </div>
+            <p>This page is a high-level overview of Rhovas that covers most of the important constructs/features. While
+              there are some specific details and motivation included, most of this information will be covered in other
+              pages rather than here in the overview.</p>
+            <div class="level">
+              <h2 id="constructs" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#constructs">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Language Constructs</span>
+              </h2>
+            </div>
+            <p>Language constructs are the different expressions, statements, and components used to structure a Rhovas
+              program.</p>
+            <div class="level">
+              <h3 id="literals" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#literals">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Literals</span>
+              </h3>
+            </div>
+            <p>Rhovas supports many of the standard literal types seen in other languages, including different number
+              bases/notations, escape characters, and interpolation.</p>
+            <ul>
+              <li>Null: <code class="has-text-dark">null</code></li>
+              <li>Boolean: <code class="has-text-dark">true</code>, <code class="has-text-dark">false</code></li>
+              <li>Integer: <code class="has-text-dark">42</code>, <code class="has-text-dark">0xFFA500</code></li>
+              <li>Decimal: <code class="has-text-dark">101.5</code>, <code class="has-text-dark">6.022e23</code></li>
+              <li>String: <code class="has-text-dark">"string"</code>, <code class="has-text-dark">"\n\r\t"</code>, <code class="has-text-dark">"val = ${val}"</code></li>
+              <li>Atom: <code class="has-text-dark">:atom</code></li>
+              <li>List: <code class="has-text-dark">[x, y, z]</code></li>
+              <li>Object: <code class="has-text-dark">{x: 1, y: 2, z: 3}</code>, <code class="has-text-dark">{x, y, z}</code></li>
+            </ul>
+            <p>Notably missing are Character literals, since the concept of a character is not well-defined and varies
+              between languages (e.g. <a href="https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html#ID293">Swift</a>
+              and <a href="https://doc.rust-lang.org/std/primitive.char.html">Rust</a>). Instead, it is likely Rhovas
+              will support separate types for working with graphemes and/or code points as needed.</p>
+            <p>Additionally, it's worth calling attention to atoms as they're less common. Atoms (or sometimes Symbols)
+              are effectively runtime values for identifiers and can be used as named constants. Rhovas encourages using
+              atoms for option-like function parameters instead of booleans or custom enums, as in:</p>
+<pre><code class="has-text-dark">range(<span class="has-text-info">1</span>, <span class="has-text-info">100</span>, <span style="color: hsl(283, 39%, 53%)">:incl</span>);
+<span class="has-text-danger">File</span>.open(<span class="has-text-success-dark">"file.txt"</span>, <span style="color: hsl(283, 39%, 53%)">:read</span>, <span style="color: hsl(283, 39%, 53%)">:write</span>);
+</code></pre>
+            <div class="level">
+              <h3 id="operators" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#operators">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Operators</span>
+              </h3>
+            </div>
+            <p>Rhovas supports most standard unary/binary operators and two indexing operators.</p>
+            <ul>
+              <li>
+                Unary:
+                <ul>
+                  <li><code class="has-text-dark">!</code>: Logical Negation</li>
+                  <li><code class="has-text-dark">-</code>: Numerical Negation</li>
+                </ul>
+              </li>
+              <li>
+                Binary:
+                <ul>
+                  <li>
+                    <code class="has-text-dark">+</code>, <code class="has-text-dark">-</code>, <code class="has-text-dark">*</code>,
+                    <code class="has-text-dark">/</code>: Mathematical (supports operator overloading)
+                  </li>
+                  <li>
+                    <code class="has-text-dark">&lt;</code>, <code class="has-text-dark">&lt;=</code>, <code class="has-text-dark">&gt;</code>,
+                    <code class="has-text-dark">&gt;=</code>: Comparison (supports operator overloading via <code class="has-text-dark">Comparable</code>)
+                  </li>
+                  <li>
+                    <code class="has-text-dark">==</code>, <code class="has-text-dark">!=</code>: Equality (supports
+                    operator overloading via <code class="has-text-dark">Equatable</code>)
+                  </li>
+                  <li>
+                    <code class="has-text-dark">===</code>, <code class="has-text-dark">!==</code>: Identity Equality
+                  </li>
+                  <li>
+                    <code class="has-text-dark">&&</code>, <code class="has-text-dark">||</code>: Logical And/Or
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Indexing:
+                <ul>
+                  <li>
+                    <code class="has-text-dark">[]</code>: Access (supports operator overloading)
+                  </li>
+                  <li>
+                    <code class="has-text-dark">[]=</code>: Assignment (supports operator overloading)
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <p>There are a few categories of operators not included primarily for readability, ease of understanding,
+              and/or having ambiguous behavior: <code class="has-text-dark">%</code> (modulus/remainder),
+              <code class="has-text-dark">+=</code>/<code class="has-text-dark">-=</code>/<code class="has-text-dark">*=</code>/<code class="has-text-dark">/=</code>
+              (compound assignment), <code class="has-text-dark">++</code>/<code class="has-text-dark">--</code>
+               (increment/decrement), <code class="has-text-dark">&lt;&lt;</code>/<code class="has-text-dark">&gt;&gt;</code>/<code class="has-text-dark">&</code>/<code class="has-text-dark">|</code>/<code class="has-text-dark">^</code>
+              (bitwise). Operators with necessary functionality like modulus or left shift instead have methods on the
+              types that support them.</p>
+            <div class="level">
+              <h4 id="operator-overloading" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#operator-overloading">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Operator Overloading</span>
+              </h4>
+            </div>
+            <p>Rhovas supports operator overloading for a limited subset of operators: <code class="has-text-dark">+</code>,
+              <code class="has-text-dark">-</code>, <code class="has-text-dark">*</code>, <code class="has-text-dark">/</code>,
+              <code class="has-text-dark">[]</code>, and <code class="has-text-dark">[]=</code> (as well as indirectly
+              for comparison/equality). Defining an overload requires both the operator and a descriptive name for that
+              type to assist clarity (e.g. <code class="has-text-dark">Vector op+ add</code> versus <code class="has-text-dark">Set op+ union</code>).
+              It is generally better to prefer using these names when not in a math-heavy context.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">struct</span> <span class="has-text-danger">Vector</span> {
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">x</span>: <span class="has-text-danger">Integer</span>;
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Integer</span>;
+
+    <span class="has-text-link">func</span> <span class="has-text-link">op</span>+ add(<span style="color: hsl(283, 39%, 53%)">other</span>: <span class="has-text-danger">Vector</span>): <span class="has-text-danger">Vector</span> { <span class="has-text-grey-light">...</span> }
+}
+</code></pre>
+            <div class="level">
+              <h3 id="variables" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#variables">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Variables</span>
+              </h3>
+            </div>
+            <p>Variables are defined with <code class="has-text-dark">val</code> (immutable) or<code class="has-text-dark">var</code>
+              (mutable). Type inference is supported with an initial value, otherwise the type must be specified.
+              Shadowing variables is also allowed.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">x</span> = <span class="has-text-info">1</span>;
+<span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Integer</span>;
+<span style="color: hsl(283, 39%, 53%)">y</span> = <span class="has-text-info">2</span>;
+</code></pre>
+            <p>The intention is for variable declarations to also support pattern matching, however this has some design
+              quirks and hasn't been finalized.</p>
+            <div class="level">
+              <h3 id="functions" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#functions">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Functions</span>
+              </h3>
+            </div>
+            <p>Functions are defined with <code class="has-text-dark">func</code> and require a name, parameters, and a
+              return type (if not <code class="has-text-dark">Void</code>) to be explicitly specified. Type inference is
+              not supported to prevent implementation types from leaking into the API.
+<pre><code class="has-text-dark"><span class="has-text-link">func</span> add(<span style="color: hsl(283, 39%, 53%)">x</span>: <span class="has-text-danger">Integer</span>, <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Integer</span>): <span class="has-text-danger">Integer</span> {
+    <span class="has-text-link">return</span> <span style="color: hsl(283, 39%, 53%)">x</span> + <span style="color: hsl(283, 39%, 53%)">y</span>;
+}
+</code></pre>
+            <p>Functions also support a wide mix of other features including overloading, generics, default arguments,
+            mutability permissions, and <code class="has-text-dark">throws</code> declarations for exceptions. As with
+            variables, the intention is for function parameters to support pattern matching as well however this hasn't
+            been finalized.</p>
+            <div class="level">
+              <h4 id="lambdas" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#lambdas">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Lambdas</span>
+              </h4>
+            </div>
+            <p>Lambdas (anonymous functions) are also supported. They can be written directly using <code class="has-text-dark">func</code>,
+              but more commonly are created implicitly through trailing lambdas which are passed to other functions.
+              Type inference is supported for both the parameters and return type.</p>
+<pre><code class="has-text-dark"><span style="color: hsl(283, 39%, 53%)">numbers</span>.map(<span class="has-text-link">func</span>(<span style="color: hsl(283, 39%, 53%)">num</span>) { <span style="color: hsl(283, 39%, 53%)">num</span> + <span class="has-text-info">1</span> })
+<span style="color: hsl(283, 39%, 53%)">numbers</span>.map |<span style="color: hsl(283, 39%, 53%)">num</span>| { <span style="color: hsl(283, 39%, 53%)">num</span> + <span class="has-text-info">1</span> }
+</code></pre>
+            <p>The implicit parameter <code class="has-text-dark">val</code> (like <a href="https://kotlinlang.org/docs/lambdas.html#it-implicit-name-of-a-single-parameter">Kotlin <code class="has-text-dark">it</code></a>)
+              can also be used for referencing lambda arguments, which is either the single argument itself or a struct
+              of multiple arguments.</p>
+<pre><code class="has-text-dark"><span style="color: hsl(283, 39%, 53%)">numbers</span>.filter { <span class="has-text-link">val</span> > <span class="has-text-info">0</span> }
+<span style="color: hsl(283, 39%, 53%)">numbers</span>.reduce(<span class="has-text-info">0</span>) { <span class="has-text-link">val</span>.<span style="color: hsl(283, 39%, 53%)">accumulator</span> + <span class="has-text-link">val</span>.<span style="color: hsl(283, 39%, 53%)">element</span> }
+</code></pre>
+            <div class="level">
+              <h3 id="if-else" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#if-else">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>If/Else</span>
+              </h3>
+            </div>
+            <p>If statements allow branching based on a condition, as in most other languages.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">if</span> (<span style="color: hsl(283, 39%, 53%)">condition</span>) { <span class="has-text-grey-light">...</span> }
+<span class="has-text-link">if</span> (<span style="color: hsl(283, 39%, 53%)">condition</span>) { <span class="has-text-grey-light">...</span> } <span class="has-text-link">else</span> { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <p>Unlike other languages, <code class="has-text-dark">if</code> can also be used as a functional form to
+              filter values into a nullable result.</p>
+<pre><code class="has-text-dark"><span class="has-text-info">1</span>.<span class="has-text-link">if</span> { <span class="has-text-link">val</span> > <span class="has-text-info">0</span> } == <span class="has-text-info">1</span>;
+<span class="has-text-info">0</span>.<span class="has-text-link">if</span> { <span class="has-text-link">val</span> > <span class="has-text-info">0</span> } == <span class="has-text-link">null</span>;
+</code></pre>
+            <div class="level">
+              <h3 id="match" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#match">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Match</span>
+              </h3>
+            </div>
+            <p>Match statements have two forms: conditional (<code class="has-text-dark">if</code>/<code class="has-text-dark">else</code>
+              chains) and structural (pattern matching).</p>
+            <div class="level">
+              <h4 id="conditional-match" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#conditional-match">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Conditional Match</span>
+              </h4>
+            </div>
+            <p>A conditional match contains multiple arbitrary conditions in the same was as <code class="has-text-dark">if</code>/<code class="has-text-dark">else</code>
+              chains. Conditions do not have to be exhaustive, so the <code class="has-text-dark">else</code> case is
+              optional and acts like an assertion.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">match</span> {
+    <span style="color: hsl(283, 39%, 53%)">x</span> > <span class="has-text-info">0</span>: print(<span class="has-text-success-dark">"x is positive"</span>);
+    <span class="has-text-link">else</span> <span style="color: hsl(283, 39%, 53%)">y</span> > <span class="has-text-info">0</span>: print(<span class="has-text-success-dark">"y is positive"</span>);
+    <span class="has-text-grey-light">//if neither is true, an AssertionError is thrown</span>
+}
+</code></pre>
+            <div class="level">
+              <h4 id="structural-match" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#structural-match">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Structural Match</span>
+              </h4>
+            </div>
+            <p>A structural match takes an argument and applies pattern matching. Unlike conditional match, a structural
+              match must be exhaustive. The <code class="has-text-dark">else</code> case can be used when the compiler
+              is not able to verify the patterns are exhaustive, which as above acts like an assertion.
+<pre><code class="has-text-dark"><span class="has-text-link">match</span> (<span style="color: hsl(283, 39%, 53%)">list</span>) {
+    []: print(<span class="has-text-success-dark">"empty"</span>);
+    <span class="has-text-link">else</span> [<span style="color: hsl(283, 39%, 53%)">head</span>, *]: print(<span class="has-text-success-dark">"head = </span><span class="has-text-danger">${</span><span style="color: hsl(283, 39%, 53%)">head</span><span class="has-text-danger">}</span><span class="has-text-success-dark">"</span>);
+}
+</code></pre>
+            <div class="level">
+              <h3 id="for" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#for">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>For</span>
+              </h3>
+            </div>
+            <p>A for loop iterates over an iterable value, as with <code class="has-text-dark">foreach</code> loops in
+              most other languages.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">for</span> (<span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">element</span> <span class="has-text-link">in</span> <span style="color: hsl(283, 39%, 53%)">iterable</span>) { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <p>Like <code class="has-text-dark">if</code>, <code class="has-text-dark">for</code> can be used as a
+              functional form as well.</p>
+<pre><code class="has-text-dark"><span style="color: hsl(283, 39%, 53%)">iterable</span>.<span class="has-text-link">for</span> { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <p>Rhovas, like Kotlin, does not support the traditional three-part for loop. In most cases iterating over
+              ranges is a better alternative (like <code class="has-text-dark">list.indices</code>) and for other
+              situations a <code class="has-text-dark">while</code> loop may be used.
+            <div class="level">
+              <h3 id="while" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#while">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>While</span>
+              </h3>
+            </div>
+            <p>A while loop repeatedly executes code while a condition is true, as in most other languages.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">while</span> (<span style="color: hsl(283, 39%, 53%)">condition</span>) { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <p>A <code class="has-text-dark">do</code>/<code class="has-text-dark">while</code> loop does not currently
+              exist, though will likely be supported.</p>
+            <div class="level">
+              <h3 id="try-catch-finally" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#try-catch-finally">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Try/Catch/Finally</span>
+              </h3>
+            </div>
+            <p>A try statement is used to catch exceptions or ensure certain cleanup occurs, as in most other languages.
+              Multiple <code class="has-text-dark">catch</code> blocks are supported, and at least one <code class="has-text-dark">catch</code>/<code class="has-text-dark">finally</code>
+              block must be defined.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">try</span> { <span class="has-text-grey-light">...</span> } <span class="has-text-link">catch</span> (<span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">e</span>: <span class="has-text-danger">Exception</span>) { <span class="has-text-grey-light">...</span> }
+<span class="has-text-link">try</span> { <span class="has-text-grey-light">...</span> } <span class="has-text-link">finally</span> { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <div class="level">
+              <h3 id="with" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#with">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>With</span>
+              </h3>
+            </div>
+            <p>A with statement is used for managing the automatic acquisition and release of resources. Resources are
+              acquired when entering the body and released when exited, including when an exception is thrown.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">with</span> (<span style="color: hsl(283, 39%, 53%)">file</span>) { <span class="has-text-grey-light">...</span> }
+<span class="has-text-link">with</span> (<span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">file</span> = <span class="has-text-danger">File</span>.open(<span class="has-text-grey-light">...</span>)) { <span class="has-text-grey-light">...</span> }
+</code></pre>
+            <div class="level">
+              <h3 id="structs" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#structs">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Structs</span>
+              </h3>
+            </div>
+            <p>Structs are objects intended to store structured data, as with <a href="https://kotlinlang.org/docs/data-classes.html">Kotlin data classes</a>
+              or <a href="https://docs.oracle.com/en/java/javase/14/language/records.html">Java records</a>. Structs
+              include default definitions for a constructor, standard methods like <code class="has-text-dark">equals</code>/<code class="has-text-dark">toString</code>,
+              and struct transformation utilities like <code class="has-text-dark">select</code>/<code class="has-text-dark">copy</code>.
+<pre><code class="has-text-dark"><span class="has-text-link">struct</span> <span class="has-text-danger">Vector</span> {
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">x</span>: <span class="has-text-danger">Decimal</span>;
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Decimal</span>;
+}
+<span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">vector</span> = <span class="has-text-danger">Vector</span>(<span class="has-text-info">1.0</span>, <span class="has-text-info">2.0</span>);
+</code></pre>
+            <p>Structs can be considered a restricted form of classes with three key differences. First, the fields of a
+              struct are considered part of the API (therefore, adding new fields is a breaking change, unlike classes).
+              Second, a struct cannot maintain invariants between fields since they can be set independently (provided
+              it is mutable). Finally, structs do not support inheritance like classes but can implement interfaces.
+              These restrictions allow structs to support pattern matching and more aggressive optimizations.
+            <div class="level">
+              <h3 id="classes" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#classes">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Classes</span>
+              </h3>
+            </div>
+            <p>Classes are objects supporting the full range of Object-Oriented capabilities, particularly encapsulation
+              and inheritance. Unlike structs, classes are intended to maintain invariants and should only be used if
+              these features are necessary.</p>
+<pre><code class="has-text-dark"><span class="has-text-link">class</span> <span class="has-text-danger">UnitVector</span> {
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">x</span>: <span class="has-text-danger">Decimal</span> { <span class="has-text-link">public</span> <span class="has-text-link">get</span> }
+    <span class="has-text-link">var</span> <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Decimal</span> { <span class="has-text-link">public</span> <span class="has-text-link">get</span> }
+
+    <span class="has-text-link">ensure</span> <span style="color: hsl(283, 39%, 53%)">x</span> * <span style="color: hsl(283, 39%, 53%)">x</span> + <span style="color: hsl(283, 39%, 53%)">y</span> * <span style="color: hsl(283, 39%, 53%)">y</span> == <span class="has-text-info">1.0</span>;
+
+    <span class="has-text-link">func</span> setDirection(<span style="color: hsl(283, 39%, 53%)">x</span>: <span class="has-text-danger">Decimal</span>, <span style="color: hsl(283, 39%, 53%)">y</span>: <span class="has-text-danger">Decimal</span>) {
+        <span class="has-text-link">require</span> <span style="color: hsl(283, 39%, 53%)">x</span> != <span class="has-text-info">0.0</span> || <span style="color: hsl(283, 39%, 53%)">y</span> != <span class="has-text-info">0.0</span>;
+        <span class="has-text-link">this</span>.<span style="color: hsl(283, 39%, 53%)">x</span> = <span class="has-text-grey-light">...</span>
+        <span class="has-text-link">this</span>.<span style="color: hsl(283, 39%, 53%)">y</span> = <span class="has-text-grey-light">...</span>
+    }
+}
+</code></pre>
+            <blockquote>Note: For sake of explicitness, the above example doesn't account for precision and assumes
+              mutable data is necessary. In most cases, an immutable <code class="has-text-dark has-background-grey-lighter">UnitVector</code>
+              struct like the previous example would be sufficient for this, or alternatively a better abstraction for
+              magnitude/direction. Examples are just that - examples!</blockquote>
+            <div class="level">
+              <h4 id="inheritance" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#inheritance">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Inheritance</span>
+              </h4>
+            </div>
+            <p>Classes may also use inheritance to extend (or be extended by) other classes. A class must explicitly
+              opt-in to inheritance using <code class="has-text-dark">virtual</code> or <code class="has-text-dark">abstract</code>.
+              Similarly, only <code class="has-text-dark">virtual</code> or <code class="has-text-dark">abstract</code>
+              functions can be overridden and must include <code class="has-text-dark">override</code>. In general,
+              inheritance is always opt-in and the superclass must design its API with inheritance in mind to ensure
+              correct behavior.
+<pre><code><span class="has-text-link">abstract</span> <span class="has-text-link">class</span> <span class="has-text-danger">Base</span> {
+    <span class="has-text-link">virtual</span> <span class="has-text-link">func</span> method() { <span class="has-text-grey-light">...</span> }
+}
+
+<span class="has-text-link">class</span> <span class="has-text-danger">Derived</span>: <span class="has-text-danger">Base</span> {
+    <span class="has-text-link">override</span> <span class="has-text-link">func</span> method() { <span class="has-text-grey-light">...</span> }
+}
+</code></pre>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+<script>
+  const navbarBurger = document.getElementById("navbar-burger")
+  const navbarMenu = document.getElementById("navbar-menu")
+
+  function toggleNavbar() {
+    navbarBurger.classList.toggle("is-active")
+    navbarMenu.classList.toggle("is-active")
+  }
+</script>
