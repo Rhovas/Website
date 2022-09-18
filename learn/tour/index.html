@@ -78,6 +78,13 @@
                   <li><a href="#structs">Structs</a></li>
                   <li><a href="#classes">Classes</a></li>
                 </ul>
+                <a href="#features">Features</a>
+                <ul>
+                  <li><a href="#embedded-dsls">Embedded DSLs</a></li>
+                  <li><a href="#mutability">Mutability</a></li>
+                  <li><a href="#pipelining">Pipelining</a></li>
+                  <li><a href="#properties">Properties</a></li>
+                </ul>
               </li>
             </ul>
             <p class="menu-label">Tutorials</p>
@@ -516,6 +523,154 @@
     <span class="has-text-link">override</span> <span class="has-text-link">func</span> method() { <span class="has-text-grey-light">...</span> }
 }
 </code></pre>
+            <div class="level">
+              <h2 id="features" class="level-item title" style="margin: 0">
+                <span class="icon is-medium" style="margin-right: 0.25rem">
+                  <a href="#features">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.25rem"></i>
+                  </a>
+                </span>
+                <span>Language Features</span>
+              </h2>
+            </div>
+            <p>Language features are the additional ideas and functionality included that make Rhovas, well, Rhovas!
+              These range from high-level concepts down to simple syntax sugar, but are ultimately intended to support
+              the mission of API design and enforcement.</p>
+            <div class="level">
+              <h3 id="embedded-dsls" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#embedded-dsls">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Embedded DSLs</span>
+              </h3>
+            </div>
+            <p>DSLs, or Domain Specific Languages, are languages specifically designed for a given problem/application
+              like regex, SQL, and HTML. Rhovas supports creating embedded DSLs through <strong>syntax macros</strong>,
+              which allow DSLs to be used directly in Rhovas code with the language's original syntax:</p>
+<pre><code><span class="has-text-link">val</span> <span style="color: hsl(283, 39%, 53%)">name</span> = <span class="has-text-success-dark">"Name"</span>;
+<span style="color: hsl(283, 39%, 53%)">db</span>.query(<span class="has-text-danger">#sql {</span>
+    <span class="has-text-link">SELECT</span> * <span class="has-text-link">FROM</span> <span style="color: hsl(283, 39%, 53%)">users</span>
+    <span class="has-text-link">WHERE</span> <span style="color: hsl(283, 39%, 53%)">name</span> = <span class="has-text-danger">${</span><span style="color: hsl(283, 39%, 53%)">name</span><span class="has-text-danger">}</span>
+<span class="has-text-danger">}</span>
+</code></pre>
+            <p>The example SQL DSL above handles the <code class="has-text-dark">name</code> variable through
+              interpolation, not concatenation, which prevents issues like SQL injection since the variable is never
+              mixed with the actual source code.</p>
+            <p>These DSLs are currently transformed into a function taking two arguments: A list of string literals and
+              a list of values (similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">JavaScript Tagged Templates</a>
+              and <a href="https://docs.scala-lang.org/overviews/core/string-interpolation.html#advanced-usage">Scala Interpolators</a>).
+              More advanced transformations are planned but waiting on macro support.</p>
+<pre><code><span class="has-text-link">func</span> sql(<span style="color: hsl(283, 39%, 53%)">literals</span>: <span class="has-text-danger">List</span>&lt;<span class="has-text-danger">String</span>&gt;, <span style="color: hsl(283, 39%, 53%)">values</span>: <span class="has-text-danger">List</span>&lt;<span class="has-text-danger">Any</span>&gt;);
+sql([<span class="has-text-success-dark">"SELECT * FROM users\nWHERE name = "</span>, <span class="has-text-success-dark">""</span>], [<span style="color: hsl(283, 39%, 53%)">name</span>])
+</code></pre>
+            <p>Embedded DSLs are great for problems that already have established DSLs, like SQL, since the syntax is
+              well-known and documented. DSLs for custom languages should be used more sparingly in the same way a
+              framework would (or at least should).</p>
+            <blockquote>For more information on the theory/research behind syntax macros, see the blog posts <a href="https://blog.willbanders.dev/articles/introducing-syntax-macros">Introducing Syntax Macros</a>
+              and <a href="https://blog.willbanders.dev/articles/semantic-analysis-abstractions">Semantic Analysis Abstractions</a>.</blockquote>
+            <div class="level">
+              <h3 id="mutability" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#mutability">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Mutability</span>
+              </h3>
+            </div>
+            <p>Rhovas allows types to include <em>mutability permissions</em>, which provide static restrictions on the
+              mutability of references and the underlying object. There are currently three permissions:</p>
+            <ul>
+              <li><strong>Readable</strong> (<code class="has-text-dark">Type</code>): The reference is read-only, but
+                the object may be mutable.</li>
+              <li><strong>Mutable</strong> (<code class="has-text-dark">+Type</code>): The reference (and therefore
+                object) is mutable. However, the object may also have other mutable references.</li>
+              <li><strong>Immutable</strong> (<code class="has-text-dark">-Type</code>): The object is immutable, thus
+                no mutable references exist. However, the object may reference other objects which are not immutable
+                (such as <code class="has-text-dark">-List&lt;T&gt;</code> being an immutable list containing
+                potentially mutable elements), making this <em>shallow</em> immutability.</li>
+            </ul>
+            <blockquote>Two other permissions being discussed are <strong>Constant</strong> (for deep immutability and
+              compile-time constants) and <strong>Unique</strong> (for ownership/lifetimes, thread safety, and mutable
+              to immutable conversions).</blockquote>
+            <p>Methods that mutate the object must be prefixed with <code class="has-text-dark">+</code>, as in
+              <code class="has-text-dark">func +mutate()</code>, which may only be used by mutable references.</p>
+            <blockquote>A related restriction is pure / referentially transparent functions, which is still under
+              discussion.</blockquote>
+            <div class="level">
+              <h3 id="pipelining" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#pipelining">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Pipelining</span>
+              </h3>
+            </div>
+            <p>Another feature from functional languages, pipelining allows a left-hand receiver to be passed as the
+              first argument to a function. The result is similar to the syntax of a method call, as shown below.</p>
+<pre><code>function(<span style="color: hsl(283, 39%, 53%)">object</span>, <span style="color: hsl(283, 39%, 53%)">arguments</span>...);
+<span style="color: hsl(283, 39%, 53%)">object</span>.|function(<span style="color: hsl(283, 39%, 53%)">arguments</span>...);
+</code></pre>
+            <p>Pipelining has two major advantages, mainly due to similarity with methods:</p>
+            <ul>
+              <li><strong>Readability</strong>: The left-to-right order is often easier to understand when chaining
+                compared to nested functions (<code class="has-text-dark">h(g(f()))</code> vs
+                <code class="has-text-dark">f().|g().|h()</code>).</li>
+              <li><strong>Discoverability</strong>: An IDE can offer suggestions for <code class="has-text-dark">object.|</code>,
+                like with methods, to both find and tab-complete available functions.</li>
+            </ul>
+            <div class="level">
+              <h4 id="extension-functions" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#extension-functions">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.15rem"></i>
+                  </a>
+                </span>
+                <span>Extension Functions</span>
+              </h4>
+            </div>
+            <p>Some language support extension functions, which allow defining new methods (really functions) on an
+              existing class. Since pipelining syntax is nearly identical to a method call, it works well for this use
+              case.</p>
+<pre><code><span class="has-text-link">func</span> extension(<span style="color: hsl(283, 39%, 53%)">object</span>: <span class="has-text-danger">Any</span>) { ... }
+<span style="color: hsl(283, 39%, 53%)">object</span>.|extension()
+</code></pre>
+            <p>Note that <code class="has-text-dark">object.|extension()</code> is an extension function using
+              pipelining while <code class="has-text-dark">object.extension()</code> is a method. It is important to
+              keep this syntactic difference for two reasons:</p>
+            <ul>
+              <li>Extension functions are still functions and are thus resolved <em>statically</em>, not dynamically
+                like methods. This can affect how overloads are resolved, especially considering type inference.</li>
+              <li>It is better to keep these scopes separated to avoid API compatability issues from the class adding
+                new methods. This separation also helps IDEs (and the compiler itself) locate definitions easily and
+                provide better support overall.</li>
+            </ul>
+            <div class="level">
+              <h3 id="properties" class="level-item title" style="margin: 0">
+                <span class="icon is-medium">
+                  <a href="#properties">
+                    <i class="fas fa-sm fa-link" style="padding-bottom: 0.20rem"></i>
+                  </a>
+                </span>
+                <span>Properties</span>
+              </h3>
+            </div>
+            <p>A property is effectively syntax sugar for getter/setter methods that look like fields. In addition to
+              the benefits from using getters/setters over direct field access, properties are also contained in a
+              single unit (helpful for metaprogramming) and generally represent 'simple' operations.</p>
+<pre><code><span style="color: hsl(283, 39%, 53%)">object</span>.<span style="color: hsl(283, 39%, 53%)">property</span>;            <span class="has-text-grey-light">//object.property();</span>
+<span style="color: hsl(283, 39%, 53%)">object</span>.<span style="color: hsl(283, 39%, 53%)">property</span> = <span style="color: hsl(283, 39%, 53%)">value</span>;    <span class="has-text-grey-light">//object.property(value);</span>
+</code></pre>
+            <p>A common issue raised with properties is that they can perform arbitrary computation, which can make it
+              hard to reason about the effects of getting or setting a property. Rhovas intends on restricting
+              properties to ensure the behavior of getters/setters matches the expectations of fields (such as with side
+              effects, consistency between get/set, etc.). These restrictions are still being determined, but is likely
+              that some cannot be strictly enforced.</p>
+            <blockquote>For more details on the cost/benefits of properties and potential restrictions, see the blog
+              post <a href="https://blog.willbanders.dev/articles/a-case-for-properties">A Case for Properties</a>.</blockquote>
           </article>
         </div>
       </div>
