@@ -7,6 +7,10 @@
   <meta name="description" content="A programming language for API design and enforcement.">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+  <script src="rhovas/kotlin-kotlin-stdlib-js-ir.js"></script>
+  <script src="rhovas/KotlinBigInteger-bignum-js-ir.js"></script>
+  <script src="rhovas/Interpreter.js"></script>
+  <script src="monaco/loader.js"></script>
 </head>
 <body class="has-navbar-fixed-top">
 <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="Main Navigation">
@@ -48,11 +52,19 @@
   </div>
 </nav>
 <section class="hero is-fullheight-with-navbar is-info">
-  <div class="hero-body">
-    <div class="container has-text-centered" style="width: 100%">
-      <h1 class="title is-size-1">Coming Soon...</h1>
-      <p class="subtitle is-size-3">The online editor is still under development.</p>
-      <p class="subtitle is-size-4">If you'd like to assist with the editor, please reach out through <a href="https://discord.gg/gm96xd8"><u>Discord</u></a>!</p>
+  <div class="hero-body" style="align-items: normal">
+    <div class="container" style="display: flex; flex-direction: column; max-width: 850px;">
+        <div style="position: relative; flex-grow: 1">
+          <div class="textarea is-link" style="height: 100%; padding: 0; border-width: 3px">
+            <div id="editor" style="height: 100%"></div>
+          </div>
+          <span class="icon is-small has-text-success" style="position: absolute; bottom: 18px; right: 32px">
+            <i class="fas fa-2x fa-play-circle" style="cursor: pointer" onclick="onExecute(this)"></i>
+          </span>
+        </div>
+        <div class="has-text-dark" style="margin-top: 24px; max-width: 850px">
+          <textarea id="output" class="textarea is-link" rows="3" readonly style="font-size: 16px; border-width: 3px; font-family: 'JetBrains Mono', monospace; resize: none"></textarea>
+        </div>
     </div>
   </div>
 </section>
@@ -65,5 +77,63 @@
   function toggleNavbar() {
     navbarBurger.classList.toggle("is-active")
     navbarMenu.classList.toggle("is-active")
+  }
+</script>
+<script>
+  let editor;
+  const output = document.getElementById("output");
+  output.value = "";
+
+  require.config({paths: {vs: "monaco"}});
+  require(["vs/editor/editor.main"], function () {
+    editor = monaco.editor.create(document.getElementById("editor"), {
+      language: "kotlin",
+      theme: "vs",
+      value: [
+        ``,
+        `range(1, 15, :incl).for {`,
+        `    match ([val.mod(3), val.mod(5)]) {`,
+        `       [0, 0]: print("FizzBuzz");`,
+        `       [0, _]: print("Fizz");`,
+        `       [_, 0]: print("Buzz");`,
+        `       else: print(val);`,
+        `    }`,
+        `};`,
+        ``,
+      ].join("\n"),
+      autoIndent: "full",
+      automaticLayout: true,
+      lineNumbersMinChars: 4,
+      fontSize: 16,
+      minimap: { enabled: false },
+    });
+  });
+
+  async function onExecute(button) {
+    const source = editor.getValue();
+    output.classList.add("is-link");
+    output.classList.remove("is-success", "is-danger");
+    button.style.setProperty("cursor", "wait");
+    output.value = "";
+    let success;
+    try {
+      Interpreter.dev.rhovas.interpreter.eval(source, function (string) {
+        output.value += output.value === "" ? "" : "\n"
+        output.value += string
+      });
+      success = !output.value.includes("Error: "); //TODO
+    } catch (error) {
+      output.value = error.message?.includes("Error: ") ? error.message : `Error: ${error.message ?? error}`;
+      success = false;
+    }
+    button.style.setProperty("cursor", "pointer");
+    output.classList.remove("is-link");
+    output.classList.toggle("is-success", success);
+    output.classList.toggle("is-danger", !success);
+  }
+
+  function stdout(string) {
+    output.value += output.value === "" ? "" : "\n"
+    output.value += string
   }
 </script>
