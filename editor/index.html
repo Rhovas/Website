@@ -83,6 +83,7 @@
   let editor;
   const output = document.getElementById("output");
   output.value = "";
+  window.rhovas = rhovas;
 
   require.config({paths: {vs: "monaco"}});
   require(["vs/editor/editor.main"], function () {
@@ -117,10 +118,7 @@
     output.value = "";
     let success;
     try {
-      Interpreter.dev.rhovas.interpreter.eval(source, function (string) {
-        output.value += output.value === "" ? "" : "\n"
-        output.value += string
-      });
+      Interpreter.dev.rhovas.interpreter.eval(source, () => "", stdout);
       success = !output.value.includes("Error: "); //TODO
     } catch (error) {
       output.value = error.message?.includes("Error: ") ? error.message : `Error: ${error.message ?? error}`;
@@ -130,6 +128,13 @@
     output.classList.remove("is-link");
     output.classList.toggle("is-success", success);
     output.classList.toggle("is-danger", !success);
+  }
+
+  function rhovas(literals, ...values) {
+    const source = literals
+      .map((e, i) => e + (values[i] === "`" ? "`" : JSON.stringify(values[i]) ?? ''))
+      .join("");
+    Interpreter.dev.rhovas.interpreter.eval(source, print)
   }
 
   function stdout(string) {
