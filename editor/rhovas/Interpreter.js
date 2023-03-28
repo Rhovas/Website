@@ -2828,7 +2828,7 @@
       this.$this_1.get_inputs_wrcrs2_k$(this.$this_1.get_context_h02k06_k$()).addLast_i401o4_k$(tmp0_safe_receiver);
       tmp$ret$0 = Unit_getInstance();
     }
-    var clazz = ensureNotNull(_get_scope__bi2zur(this.$this_1.get_context_h02k06_k$(), this.$this_1).get_types_izd7io_k$().get_4u8u51_k$(ast.get_name_woqyms_k$()));
+    var type = ensureNotNull(_get_scope__bi2zur(this.$this_1.get_context_h02k06_k$(), this.$this_1).get_types_izd7io_k$().get_4u8u51_k$(ast.get_name_woqyms_k$()));
     var tmp$ret$3;
     // Inline function 'kotlin.collections.map' call
     var tmp1_map = ast.get_members_gyhru8_k$();
@@ -2840,12 +2840,13 @@
       var item = tmp0_iterator.next_20eer_k$();
       var tmp$ret$1;
       // Inline function 'dev.rhovas.interpreter.analyzer.rhovas.DefinePhase.visit.<anonymous>' call
-      tmp$ret$1 = this.visit_q2h7pc_k$(item, clazz);
+      tmp$ret$1 = this.visit_q2h7pc_k$(item, type);
       tmp0_mapTo.add_1j60pz_k$(tmp$ret$1);
     }
     tmp$ret$2 = tmp0_mapTo;
     tmp$ret$3 = tmp$ret$2;
     var members = toMutableList(tmp$ret$3);
+    type.get_base_wojaxm_k$().inherit_tivumv_k$(Companion_getInstance_2().get_ANY_18jxy5_k$());
     var tmp$ret$5;
     // Inline function 'kotlin.also' call
     var tmp2_also = new Class_0(ast, members);
@@ -14430,7 +14431,9 @@
     return new Object_1(Companion_getInstance_2().get_VOID_wob8pp_k$(), Unit_getInstance());
   };
   protoOf(Evaluator).visit_m4rvj9_k$ = function (ir) {
-    this.scope_1.get_types_izd7io_k$().define_b5rmah_k$(ir.get_type_wovaf7_k$(), ir.get_type_wovaf7_k$().get_base_wojaxm_k$().get_name_woqyms_k$());
+    if (!this.scope_1.get_types_izd7io_k$().isDefined_bxumpo_k$(ir.get_type_wovaf7_k$().get_base_wojaxm_k$().get_name_woqyms_k$(), true)) {
+      this.scope_1.get_types_izd7io_k$().define_b5rmah_k$(ir.get_type_wovaf7_k$(), ir.get_type_wovaf7_k$().get_base_wojaxm_k$().get_name_woqyms_k$());
+    }
     // Inline function 'kotlin.collections.forEach' call
     var tmp0_forEach = ir.get_members_gyhru8_k$();
     var tmp0_iterator = tmp0_forEach.iterator_jk1svi_k$();
@@ -16417,7 +16420,65 @@
     // Inline function 'kotlin.collections.component1' call
     tmp$ret$0 = _name_for_destructuring_parameter_0__wldtmu.get_fkrdnv_k$(0);
     var instance = tmp$ret$0;
-    return new Object_1(Companion_getInstance_2().get_STRING_403d3u_k$(), toString(instance.get_value_j01efc_k$()));
+    return new Object_1(Companion_getInstance_2().get_STRING_403d3u_k$(), invoke$toString(instance.get_value_j01efc_k$()));
+  }
+  function invoke$toString(value) {
+    var tmp0_subject = value;
+    var tmp;
+    if (tmp0_subject instanceof Object_1) {
+      tmp = value.get_methods_h2gczt_k$().toString();
+    } else {
+      if (!(tmp0_subject == null) ? isInterface(tmp0_subject, Map) : false) {
+        var tmp$ret$4;
+        // Inline function 'kotlin.collections.mapValues' call
+        var tmp2_mapValues = value;
+        var tmp$ret$3;
+        // Inline function 'kotlin.collections.mapValuesTo' call
+        var tmp1_mapValuesTo = LinkedHashMap_init_$Create$(mapCapacity(tmp2_mapValues.get_size_woubt6_k$()));
+        var tmp$ret$2;
+        // Inline function 'kotlin.collections.associateByTo' call
+        var tmp0_associateByTo = tmp2_mapValues.get_entries_p20ztl_k$();
+        var tmp0_iterator = tmp0_associateByTo.iterator_jk1svi_k$();
+        while (tmp0_iterator.hasNext_bitz1p_k$()) {
+          var element = tmp0_iterator.next_20eer_k$();
+          var tmp$ret$0;
+          // Inline function 'kotlin.collections.mapValuesTo.<anonymous>' call
+          tmp$ret$0 = element.get_key_18j28a_k$();
+          var tmp_0 = tmp$ret$0;
+          var tmp$ret$1;
+          // Inline function 'dev.rhovas.interpreter.library.AnyInitializer.AnyInitializer$initialize$lambda.invoke.toString.<anonymous>' call
+          tmp$ret$1 = invoke$toString(element.get_value_j01efc_k$());
+          tmp1_mapValuesTo.put_3mhbri_k$(tmp_0, tmp$ret$1);
+        }
+        tmp$ret$2 = tmp1_mapValuesTo;
+        tmp$ret$3 = tmp$ret$2;
+        tmp$ret$4 = tmp$ret$3;
+        tmp = toString_0(tmp$ret$4);
+      } else {
+        if (!(tmp0_subject == null) ? isInterface(tmp0_subject, Collection) : false) {
+          var tmp$ret$7;
+          // Inline function 'kotlin.collections.map' call
+          var tmp4_map = value;
+          var tmp$ret$6;
+          // Inline function 'kotlin.collections.mapTo' call
+          var tmp3_mapTo = ArrayList_init_$Create$_0(collectionSizeOrDefault(tmp4_map, 10));
+          var tmp0_iterator_0 = tmp4_map.iterator_jk1svi_k$();
+          while (tmp0_iterator_0.hasNext_bitz1p_k$()) {
+            var item = tmp0_iterator_0.next_20eer_k$();
+            var tmp$ret$5;
+            // Inline function 'dev.rhovas.interpreter.library.AnyInitializer.AnyInitializer$initialize$lambda.invoke.toString.<anonymous>' call
+            tmp$ret$5 = invoke$toString(item);
+            tmp3_mapTo.add_1j60pz_k$(tmp$ret$5);
+          }
+          tmp$ret$6 = tmp3_mapTo;
+          tmp$ret$7 = tmp$ret$6;
+          tmp = toString_0(tmp$ret$7);
+        } else {
+          tmp = toString(value);
+        }
+      }
+    }
+    return tmp;
   }
   function AnyInitializer() {
     AnyInitializer_instance = this;
