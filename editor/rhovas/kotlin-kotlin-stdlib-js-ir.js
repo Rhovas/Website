@@ -32,11 +32,6 @@ if (typeof Array.prototype.fill === 'undefined') {
     Object.defineProperty(TypedArray.prototype, 'fill', {value: Array.prototype.fill});
   }
 });
-if (typeof Math.log10 === 'undefined') {
-  Math.log10 = function (x) {
-    return Math.log(x) * Math.LOG10E;
-  };
-}
 if (typeof Math.clz32 === 'undefined') {
   Math.clz32 = function (log, LN2) {
     return function (x) {
@@ -47,6 +42,11 @@ if (typeof Math.clz32 === 'undefined') {
       return 31 - (log(asUint) / LN2 | 0) | 0; // the "| 0" acts like math.floor
     };
   }(Math.log, Math.LN2);
+}
+if (typeof Math.log10 === 'undefined') {
+  Math.log10 = function (x) {
+    return Math.log(x) * Math.LOG10E;
+  };
 }
 if (typeof String.prototype.endsWith === 'undefined') {
   Object.defineProperty(String.prototype, 'endsWith', {value: function (searchString, position) {
@@ -175,10 +175,10 @@ if (typeof Math.imul === 'undefined') {
   setMetadataFor(Continuation, 'Continuation', interfaceMeta);
   setMetadataFor(SequenceBuilderIterator, 'SequenceBuilderIterator', classMeta, SequenceScope, [SequenceScope, Iterator_3, Continuation], VOID, VOID, [1]);
   setMetadataFor(_no_name_provided__qut3iv_2, VOID, classMeta, VOID, [Sequence]);
-  setMetadataFor(DropTakeSequence, 'DropTakeSequence', interfaceMeta, VOID, [Sequence]);
-  setMetadataFor(EmptySequence, 'EmptySequence', objectMeta, VOID, [Sequence, DropTakeSequence]);
   setMetadataFor(GeneratorSequence$iterator$1, VOID, classMeta, VOID, [Iterator_3]);
   setMetadataFor(GeneratorSequence, 'GeneratorSequence', classMeta, VOID, [Sequence]);
+  setMetadataFor(DropTakeSequence, 'DropTakeSequence', interfaceMeta, VOID, [Sequence]);
+  setMetadataFor(EmptySequence, 'EmptySequence', objectMeta, VOID, [Sequence, DropTakeSequence]);
   setMetadataFor(TakeSequence$iterator$1, VOID, classMeta, VOID, [Iterator_3]);
   setMetadataFor(TakeSequence, 'TakeSequence', classMeta, VOID, [Sequence, DropTakeSequence]);
   setMetadataFor(TransformingSequence$iterator$1, VOID, classMeta, VOID, [Iterator_3]);
@@ -282,6 +282,7 @@ if (typeof Math.imul === 'undefined') {
   setMetadataFor(DynamicExtension, 'DynamicExtension', classMeta, VOID, [Annotation]);
   setMetadataFor(HidesMembers, 'HidesMembers', classMeta, VOID, [Annotation]);
   setMetadataFor(OnlyInputTypes, 'OnlyInputTypes', classMeta, VOID, [Annotation]);
+  setMetadataFor(AccessibleLateinitPropertyLiteral, 'AccessibleLateinitPropertyLiteral', classMeta, VOID, [Annotation]);
   setMetadataFor(Base64, 'Base64', classMeta);
   setMetadataFor(Default, 'Default', objectMeta, Base64);
   setMetadataFor(ExperimentalEncodingApi, 'ExperimentalEncodingApi', classMeta, VOID, [Annotation]);
@@ -467,19 +468,19 @@ if (typeof Math.imul === 'undefined') {
   setMetadataFor(DynamicKType, 'DynamicKType', objectMeta, VOID, [KType]);
   setMetadataFor(KTypeParameterImpl, 'KTypeParameterImpl', classMeta, VOID, [KTypeParameter]);
   setMetadataFor(PrimitiveClasses, 'PrimitiveClasses', objectMeta);
+  setMetadataFor(ConstrainedOnceSequence, 'ConstrainedOnceSequence', classMeta, VOID, [Sequence]);
   setMetadataFor(Appendable, 'Appendable', interfaceMeta);
   setMetadataFor(StringBuilder, 'StringBuilder', classMeta, VOID, [Appendable, CharSequence]);
   setMetadataFor(Companion_23, 'Companion', objectMeta);
   setMetadataFor(Regex$splitToSequence$slambda, 'Regex$splitToSequence$slambda', classMeta, CoroutineImpl, [CoroutineImpl], VOID, VOID, [1]);
   setMetadataFor(Regex, 'Regex', classMeta);
-  setMetadataFor(RegexOption, 'RegexOption', classMeta, Enum);
   setMetadataFor(MatchGroup, 'MatchGroup', classMeta);
+  setMetadataFor(RegexOption, 'RegexOption', classMeta, Enum);
   setMetadataFor(findNext$1$groups$1, VOID, classMeta, AbstractCollection, [MatchNamedGroupCollection, AbstractCollection]);
   setMetadataFor(findNext$1$groupValues$1, VOID, classMeta, AbstractList);
   setMetadataFor(findNext$1, VOID, classMeta, VOID, [MatchResult]);
   setMetadataFor(sam$kotlin_Comparator$0_1, 'sam$kotlin_Comparator$0', classMeta, VOID, [Comparator]);
   setMetadataFor(ExceptionTraceBuilder, 'ExceptionTraceBuilder', classMeta);
-  setMetadataFor(BitMask, 'BitMask', classMeta);
   setMetadataFor(DefaultConstructorMarker, 'DefaultConstructorMarker', objectMeta);
   setMetadataFor(arrayIterator$1, VOID, classMeta, VOID, [Iterator_3]);
   setMetadataFor(booleanArrayIterator$1, VOID, classMeta, BooleanIterator);
@@ -496,7 +497,6 @@ if (typeof Math.imul === 'undefined') {
   setMetadataFor(JsImplicitExport, 'JsImplicitExport', classMeta, VOID, [Annotation]);
   setMetadataFor(Companion_24, 'Companion', objectMeta);
   setMetadataFor(Long, 'Long', classMeta, Number_0, [Number_0, Comparable]);
-  setMetadataFor(InterfaceIdService, 'InterfaceIdService', objectMeta);
   setMetadataFor(IrLinkageError, 'IrLinkageError', classMeta, Error_0);
   setMetadataFor(SuspendFunction0, 'SuspendFunction0', interfaceMeta, VOID, VOID, VOID, VOID, [0]);
   setMetadataFor(SuspendFunction2, 'SuspendFunction2', interfaceMeta, VOID, VOID, VOID, VOID, [2]);
@@ -933,6 +933,9 @@ if (typeof Math.imul === 'undefined') {
   function contains_3(_this__u8e3s4, element) {
     return indexOf_1(_this__u8e3s4, element) >= 0;
   }
+  function contains_4(_this__u8e3s4, element) {
+    return indexOf_2(_this__u8e3s4, element) >= 0;
+  }
   function single(_this__u8e3s4) {
     var tmp0_subject = _this__u8e3s4.length;
     var tmp;
@@ -962,8 +965,8 @@ if (typeof Math.imul === 'undefined') {
   function filterNotNull(_this__u8e3s4) {
     return filterNotNullTo(_this__u8e3s4, ArrayList_init_$Create$());
   }
-  function contains_4(_this__u8e3s4, element) {
-    return indexOf_2(_this__u8e3s4, element) >= 0;
+  function contains_5(_this__u8e3s4, element) {
+    return indexOf_3(_this__u8e3s4, element) >= 0;
   }
   function toMutableList(_this__u8e3s4) {
     return ArrayList_init_$Create$_1(asCollection(_this__u8e3s4));
@@ -1053,6 +1056,20 @@ if (typeof Math.imul === 'undefined') {
        while (inductionVariable <= last);
     return -1;
   }
+  function indexOf_2(_this__u8e3s4, element) {
+    var inductionVariable = 0;
+    var last = _this__u8e3s4.length - 1 | 0;
+    if (inductionVariable <= last)
+      do {
+        var index = inductionVariable;
+        inductionVariable = inductionVariable + 1 | 0;
+        if (equals_0(new Char(element), new Char(_this__u8e3s4[index]))) {
+          return index;
+        }
+      }
+       while (inductionVariable <= last);
+    return -1;
+  }
   function filterNotNullTo(_this__u8e3s4, destination) {
     var indexedObject = _this__u8e3s4;
     var inductionVariable = 0;
@@ -1066,7 +1083,7 @@ if (typeof Math.imul === 'undefined') {
     }
     return destination;
   }
-  function indexOf_2(_this__u8e3s4, element) {
+  function indexOf_3(_this__u8e3s4, element) {
     if (element == null) {
       var inductionVariable = 0;
       var last = _this__u8e3s4.length - 1 | 0;
@@ -1100,7 +1117,13 @@ if (typeof Math.imul === 'undefined') {
   function get_indices_2(_this__u8e3s4) {
     return new IntRange(0, get_lastIndex_2(_this__u8e3s4));
   }
+  function get_indices_3(_this__u8e3s4) {
+    return new IntRange(0, get_lastIndex_3(_this__u8e3s4));
+  }
   function get_lastIndex_2(_this__u8e3s4) {
+    return _this__u8e3s4.length - 1 | 0;
+  }
+  function get_lastIndex_3(_this__u8e3s4) {
     return _this__u8e3s4.length - 1 | 0;
   }
   function any_0(_this__u8e3s4, predicate) {
@@ -1152,9 +1175,6 @@ if (typeof Math.imul === 'undefined') {
     }
     return -1;
   }
-  function contains_5(_this__u8e3s4, element) {
-    return indexOf_3(_this__u8e3s4, element) >= 0;
-  }
   function joinToString(_this__u8e3s4, separator, prefix, postfix, limit, truncated, transform) {
     separator = separator === VOID ? ', ' : separator;
     prefix = prefix === VOID ? '' : prefix;
@@ -1202,20 +1222,6 @@ if (typeof Math.imul === 'undefined') {
     }
     return null;
   }
-  function indexOf_3(_this__u8e3s4, element) {
-    var inductionVariable = 0;
-    var last = _this__u8e3s4.length - 1 | 0;
-    if (inductionVariable <= last)
-      do {
-        var index = inductionVariable;
-        inductionVariable = inductionVariable + 1 | 0;
-        if (equals_0(new Char(element), new Char(_this__u8e3s4[index]))) {
-          return index;
-        }
-      }
-       while (inductionVariable <= last);
-    return -1;
-  }
   function joinTo(_this__u8e3s4, buffer, separator, prefix, postfix, limit, truncated, transform) {
     separator = separator === VOID ? ', ' : separator;
     prefix = prefix === VOID ? '' : prefix;
@@ -1245,12 +1251,6 @@ if (typeof Math.imul === 'undefined') {
     }
     buffer.append_oz4qxs_k$(postfix);
     return buffer;
-  }
-  function get_indices_3(_this__u8e3s4) {
-    return new IntRange(0, get_lastIndex_3(_this__u8e3s4));
-  }
-  function get_lastIndex_3(_this__u8e3s4) {
-    return _this__u8e3s4.length - 1 | 0;
   }
   function contains_6(_this__u8e3s4, element) {
     return indexOf_4(_this__u8e3s4, element) >= 0;
@@ -1627,6 +1627,16 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$0 = tmp0_associateByTo;
     return tmp$ret$0;
   }
+  function toMutableSet(_this__u8e3s4) {
+    var tmp0_subject = _this__u8e3s4;
+    var tmp;
+    if (isInterface(tmp0_subject, Collection)) {
+      tmp = LinkedHashSet_init_$Create$_1(_this__u8e3s4);
+    } else {
+      tmp = toCollection_0(_this__u8e3s4, LinkedHashSet_init_$Create$_0());
+    }
+    return tmp;
+  }
   function count_0(_this__u8e3s4, predicate) {
     var tmp;
     if (isInterface(_this__u8e3s4, Collection)) {
@@ -1670,16 +1680,6 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$1 = tmp0_mapNotNullTo;
     return tmp$ret$1;
   }
-  function toMutableSet(_this__u8e3s4) {
-    var tmp0_subject = _this__u8e3s4;
-    var tmp;
-    if (isInterface(tmp0_subject, Collection)) {
-      tmp = LinkedHashSet_init_$Create$_1(_this__u8e3s4);
-    } else {
-      tmp = toCollection_0(_this__u8e3s4, LinkedHashSet_init_$Create$_0());
-    }
-    return tmp;
-  }
   function last(_this__u8e3s4) {
     if (_this__u8e3s4.isEmpty_y1axqb_k$())
       throw NoSuchElementException_init_$Create$_0('List is empty.');
@@ -1692,18 +1692,22 @@ if (typeof Math.imul === 'undefined') {
       action(element);
     }
   }
-  function withIndex_0(_this__u8e3s4) {
-    return new IndexingIterable(withIndex$lambda_0(_this__u8e3s4));
+  function lastOrNull_0(_this__u8e3s4) {
+    return _this__u8e3s4.isEmpty_y1axqb_k$() ? null : _this__u8e3s4.get_fkrdnv_k$(_this__u8e3s4.get_size_woubt6_k$() - 1 | 0);
   }
   function getOrNull_0(_this__u8e3s4, index) {
     return (index >= 0 ? index <= get_lastIndex_7(_this__u8e3s4) : false) ? _this__u8e3s4.get_fkrdnv_k$(index) : null;
   }
-  function fold_1(_this__u8e3s4, initial, operation) {
-    var accumulator = initial;
-    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
-    while (tmp0_iterator.hasNext_bitz1p_k$()) {
-      var element = tmp0_iterator.next_20eer_k$();
-      accumulator = operation(accumulator, element);
+  function withIndex_0(_this__u8e3s4) {
+    return new IndexingIterable(withIndex$lambda_0(_this__u8e3s4));
+  }
+  function reduceOrNull(_this__u8e3s4, operation) {
+    var iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    if (!iterator.hasNext_bitz1p_k$())
+      return null;
+    var accumulator = iterator.next_20eer_k$();
+    while (iterator.hasNext_bitz1p_k$()) {
+      accumulator = operation(accumulator, iterator.next_20eer_k$());
     }
     return accumulator;
   }
@@ -1733,19 +1737,19 @@ if (typeof Math.imul === 'undefined') {
       throw NoSuchElementException_init_$Create$_0('List is empty.');
     return _this__u8e3s4.get_fkrdnv_k$(0);
   }
-  function firstOrNull_1(_this__u8e3s4) {
-    var tmp0_subject = _this__u8e3s4;
-    if (isInterface(tmp0_subject, List)) {
-      if (_this__u8e3s4.isEmpty_y1axqb_k$())
-        return null;
-      else
-        return _this__u8e3s4.get_fkrdnv_k$(0);
-    } else {
-      var iterator = _this__u8e3s4.iterator_jk1svi_k$();
-      if (!iterator.hasNext_bitz1p_k$())
-        return null;
-      return iterator.next_20eer_k$();
+  function filter(_this__u8e3s4, predicate) {
+    var tmp$ret$0;
+    // Inline function 'kotlin.collections.filterTo' call
+    var tmp0_filterTo = ArrayList_init_$Create$();
+    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var element = tmp0_iterator.next_20eer_k$();
+      if (predicate(element)) {
+        tmp0_filterTo.add_1j60pz_k$(element);
+      }
     }
+    tmp$ret$0 = tmp0_filterTo;
+    return tmp$ret$0;
   }
   function associateWith(_this__u8e3s4, valueSelector) {
     var result = LinkedHashMap_init_$Create$_2(coerceAtLeast(mapCapacity(collectionSizeOrDefault(_this__u8e3s4, 10)), 16));
@@ -1807,25 +1811,16 @@ if (typeof Math.imul === 'undefined') {
     }
     return null;
   }
-  function filter(_this__u8e3s4, predicate) {
-    var tmp$ret$0;
-    // Inline function 'kotlin.collections.filterTo' call
-    var tmp0_filterTo = ArrayList_init_$Create$();
-    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
-    while (tmp0_iterator.hasNext_bitz1p_k$()) {
-      var element = tmp0_iterator.next_20eer_k$();
-      if (predicate(element)) {
-        tmp0_filterTo.add_1j60pz_k$(element);
-      }
-    }
-    tmp$ret$0 = tmp0_filterTo;
-    return tmp$ret$0;
-  }
   function component1(_this__u8e3s4) {
     return _this__u8e3s4.get_fkrdnv_k$(0);
   }
   function component2(_this__u8e3s4) {
     return _this__u8e3s4.get_fkrdnv_k$(1);
+  }
+  function intersect(_this__u8e3s4, other) {
+    var set = toMutableSet(_this__u8e3s4);
+    retainAll_0(set, other);
+    return set;
   }
   function first_0(_this__u8e3s4, predicate) {
     var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
@@ -1836,7 +1831,7 @@ if (typeof Math.imul === 'undefined') {
     }
     throw NoSuchElementException_init_$Create$_0('Collection contains no element matching the predicate.');
   }
-  function firstOrNull_2(_this__u8e3s4, predicate) {
+  function firstOrNull_1(_this__u8e3s4, predicate) {
     var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
     while (tmp0_iterator.hasNext_bitz1p_k$()) {
       var element = tmp0_iterator.next_20eer_k$();
@@ -1874,9 +1869,6 @@ if (typeof Math.imul === 'undefined') {
   function component3(_this__u8e3s4) {
     return _this__u8e3s4.get_fkrdnv_k$(2);
   }
-  function lastOrNull_0(_this__u8e3s4) {
-    return _this__u8e3s4.isEmpty_y1axqb_k$() ? null : _this__u8e3s4.get_fkrdnv_k$(_this__u8e3s4.get_size_woubt6_k$() - 1 | 0);
-  }
   function find(_this__u8e3s4, predicate) {
     var tmp$ret$0;
     $l$block: {
@@ -1893,15 +1885,19 @@ if (typeof Math.imul === 'undefined') {
     }
     return tmp$ret$0;
   }
-  function reduceOrNull(_this__u8e3s4, operation) {
-    var iterator = _this__u8e3s4.iterator_jk1svi_k$();
-    if (!iterator.hasNext_bitz1p_k$())
-      return null;
-    var accumulator = iterator.next_20eer_k$();
-    while (iterator.hasNext_bitz1p_k$()) {
-      accumulator = operation(accumulator, iterator.next_20eer_k$());
+  function fold_1(_this__u8e3s4, initial, operation) {
+    var accumulator = initial;
+    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var element = tmp0_iterator.next_20eer_k$();
+      accumulator = operation(accumulator, element);
     }
     return accumulator;
+  }
+  function union(_this__u8e3s4, other) {
+    var set = toMutableSet(_this__u8e3s4);
+    addAll(set, other);
+    return set;
   }
   function sortedBy(_this__u8e3s4, selector) {
     var tmp$ret$0;
@@ -2044,6 +2040,14 @@ if (typeof Math.imul === 'undefined') {
     }
     return destination;
   }
+  function toCollection_0(_this__u8e3s4, destination) {
+    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var item = tmp0_iterator.next_20eer_k$();
+      destination.add_1j60pz_k$(item);
+    }
+    return destination;
+  }
   function mapNotNullTo(_this__u8e3s4, destination, transform) {
     // Inline function 'kotlin.collections.forEach' call
     var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
@@ -2063,14 +2067,6 @@ if (typeof Math.imul === 'undefined') {
     }
     return destination;
   }
-  function toCollection_0(_this__u8e3s4, destination) {
-    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
-    while (tmp0_iterator.hasNext_bitz1p_k$()) {
-      var item = tmp0_iterator.next_20eer_k$();
-      destination.add_1j60pz_k$(item);
-    }
-    return destination;
-  }
   function associateTo(_this__u8e3s4, destination, transform) {
     var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
     while (tmp0_iterator.hasNext_bitz1p_k$()) {
@@ -2078,6 +2074,16 @@ if (typeof Math.imul === 'undefined') {
       // Inline function 'kotlin.collections.plusAssign' call
       var tmp0_plusAssign = transform(element);
       destination.put_3mhbri_k$(tmp0_plusAssign.get_first_irdx8n_k$(), tmp0_plusAssign.get_second_jf7fjx_k$());
+    }
+    return destination;
+  }
+  function filterTo(_this__u8e3s4, destination, predicate) {
+    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var element = tmp0_iterator.next_20eer_k$();
+      if (predicate(element)) {
+        destination.add_1j60pz_k$(element);
+      }
     }
     return destination;
   }
@@ -2113,16 +2119,6 @@ if (typeof Math.imul === 'undefined') {
       list.add_1j60pz_k$(transform(first.next_20eer_k$(), second.next_20eer_k$()));
     }
     return list;
-  }
-  function filterTo(_this__u8e3s4, destination, predicate) {
-    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
-    while (tmp0_iterator.hasNext_bitz1p_k$()) {
-      var element = tmp0_iterator.next_20eer_k$();
-      if (predicate(element)) {
-        destination.add_1j60pz_k$(element);
-      }
-    }
-    return destination;
   }
   function sortedWith(_this__u8e3s4, comparator) {
     if (isInterface(_this__u8e3s4, Collection)) {
@@ -2228,6 +2224,16 @@ if (typeof Math.imul === 'undefined') {
     // Inline function 'kotlin.sequences.Sequence' call
     tmp$ret$0 = new _no_name_provided__qut3iv(_this__u8e3s4);
     return tmp$ret$0;
+  }
+  function filterNotTo(_this__u8e3s4, destination, predicate) {
+    var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+    while (tmp0_iterator.hasNext_bitz1p_k$()) {
+      var element = tmp0_iterator.next_20eer_k$();
+      if (!predicate(element)) {
+        destination.add_1j60pz_k$(element);
+      }
+    }
+    return destination;
   }
   function contains_7(_this__u8e3s4, element) {
     if (isInterface(_this__u8e3s4, Collection))
@@ -2613,6 +2619,31 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$0 = this.$this_asIterable_1.iterator_jk1svi_k$();
     return tmp$ret$0;
   };
+  function minus(_this__u8e3s4, elements) {
+    var other = convertToListIfNotCollection(elements);
+    if (other.isEmpty_y1axqb_k$())
+      return toSet(_this__u8e3s4);
+    if (isInterface(other, Set)) {
+      var tmp$ret$1;
+      // Inline function 'kotlin.collections.filterNotTo' call
+      var tmp0_filterNotTo = LinkedHashSet_init_$Create$_0();
+      var tmp0_iterator = _this__u8e3s4.iterator_jk1svi_k$();
+      while (tmp0_iterator.hasNext_bitz1p_k$()) {
+        var element = tmp0_iterator.next_20eer_k$();
+        var tmp$ret$0;
+        // Inline function 'kotlin.collections.minus.<anonymous>' call
+        tmp$ret$0 = other.contains_2ehdt1_k$(element);
+        if (!tmp$ret$0) {
+          tmp0_filterNotTo.add_1j60pz_k$(element);
+        }
+      }
+      tmp$ret$1 = tmp0_filterNotTo;
+      return tmp$ret$1;
+    }
+    var result = LinkedHashSet_init_$Create$_1(_this__u8e3s4);
+    result.removeAll_99to5v_k$(other);
+    return result;
+  }
   function getOrElse(_this__u8e3s4, index, defaultValue) {
     return (index >= 0 ? index <= get_lastIndex_8(_this__u8e3s4) : false) ? charSequenceGet(_this__u8e3s4, index) : defaultValue(index).value_1;
   }
@@ -5533,6 +5564,9 @@ if (typeof Math.imul === 'undefined') {
   function listOf_0() {
     return emptyList();
   }
+  function get_lastIndex_7(_this__u8e3s4) {
+    return _this__u8e3s4.get_size_woubt6_k$() - 1 | 0;
+  }
   function listOfNotNull(elements) {
     return filterNotNull(elements);
   }
@@ -5555,9 +5589,6 @@ if (typeof Math.imul === 'undefined') {
       default:
         return _this__u8e3s4;
     }
-  }
-  function get_lastIndex_7(_this__u8e3s4) {
-    return _this__u8e3s4.get_size_woubt6_k$() - 1 | 0;
   }
   function List_0(size, init) {
     var tmp$ret$0;
@@ -5726,7 +5757,7 @@ if (typeof Math.imul === 'undefined') {
     return tmp$ret$0;
   };
   protoOf(ArrayAsCollection).contains_2ehdtg_k$ = function (element) {
-    return contains_4(this.values_1, element);
+    return contains_5(this.values_1, element);
   };
   protoOf(ArrayAsCollection).contains_2ehdt1_k$ = function (element) {
     if (!(element == null ? true : isObject(element)))
@@ -6019,6 +6050,9 @@ if (typeof Math.imul === 'undefined') {
     }
     return result;
   }
+  function mapOf_0(pairs) {
+    return pairs.length > 0 ? toMap(pairs, LinkedHashMap_init_$Create$_2(mapCapacity(pairs.length))) : emptyMap();
+  }
   function mutableMapOf_0(pairs) {
     var tmp$ret$0;
     // Inline function 'kotlin.apply' call
@@ -6076,6 +6110,15 @@ if (typeof Math.imul === 'undefined') {
   }
   function iterator_0(_this__u8e3s4) {
     return _this__u8e3s4.get_entries_p20ztl_k$().iterator_jk1svi_k$();
+  }
+  function toMap(_this__u8e3s4, destination) {
+    var tmp$ret$0;
+    // Inline function 'kotlin.apply' call
+    // Inline function 'kotlin.contracts.contract' call
+    // Inline function 'kotlin.collections.toMap.<anonymous>' call
+    putAll(destination, _this__u8e3s4);
+    tmp$ret$0 = destination;
+    return tmp$ret$0;
   }
   function putAll(_this__u8e3s4, pairs) {
     var indexedObject = pairs;
@@ -6189,6 +6232,9 @@ if (typeof Math.imul === 'undefined') {
       return result;
     }
   }
+  function retainAll_0(_this__u8e3s4, elements) {
+    return _this__u8e3s4.retainAll_j44sd0_k$(convertToListIfNotCollection(elements));
+  }
   function filterInPlace_0(_this__u8e3s4, predicate, predicateResultToRemove) {
     if (!isInterface(_this__u8e3s4, RandomAccess)) {
       return filterInPlace_1(isInterface(_this__u8e3s4, MutableIterable) ? _this__u8e3s4 : THROW_CCE(), predicate, predicateResultToRemove);
@@ -6224,6 +6270,15 @@ if (typeof Math.imul === 'undefined') {
     } else {
       return false;
     }
+  }
+  function convertToListIfNotCollection(_this__u8e3s4) {
+    var tmp;
+    if (isInterface(_this__u8e3s4, Collection)) {
+      tmp = _this__u8e3s4;
+    } else {
+      tmp = toList_1(_this__u8e3s4);
+    }
+    return tmp;
   }
   function filterInPlace_1(_this__u8e3s4, predicate, predicateResultToRemove) {
     var result = false;
@@ -6493,32 +6548,26 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$0 = iterator_1(this.$block_1);
     return tmp$ret$0;
   };
-  function generateSequence(seed, nextFunction) {
+  function generateSequence(nextFunction) {
+    return constrainOnce(new GeneratorSequence(nextFunction, generateSequence$lambda(nextFunction)));
+  }
+  function generateSequence_0(seed, nextFunction) {
     var tmp;
     if (seed == null) {
       tmp = EmptySequence_getInstance();
     } else {
-      tmp = new GeneratorSequence(generateSequence$lambda(seed), nextFunction);
+      tmp = new GeneratorSequence(generateSequence$lambda_0(seed), nextFunction);
     }
     return tmp;
   }
-  function EmptySequence() {
-    EmptySequence_instance = this;
-  }
-  protoOf(EmptySequence).iterator_jk1svi_k$ = function () {
-    return EmptyIterator_getInstance();
-  };
-  protoOf(EmptySequence).drop_fqkg4y_k$ = function (n) {
-    return EmptySequence_getInstance();
-  };
-  protoOf(EmptySequence).take_fj41k6_k$ = function (n) {
-    return EmptySequence_getInstance();
-  };
-  var EmptySequence_instance;
-  function EmptySequence_getInstance() {
-    if (EmptySequence_instance == null)
-      new EmptySequence();
-    return EmptySequence_instance;
+  function constrainOnce(_this__u8e3s4) {
+    var tmp;
+    if (_this__u8e3s4 instanceof ConstrainedOnceSequence) {
+      tmp = _this__u8e3s4;
+    } else {
+      tmp = new ConstrainedOnceSequence(_this__u8e3s4);
+    }
+    return tmp;
   }
   function calcNext($this) {
     $this.nextItem_1 = $this.nextState_1 === -2 ? $this.this$0__1.getInitialValue_1() : $this.this$0__1.getNextValue_1(ensureNotNull($this.nextItem_1));
@@ -6571,9 +6620,27 @@ if (typeof Math.imul === 'undefined') {
   protoOf(GeneratorSequence).iterator_jk1svi_k$ = function () {
     return new GeneratorSequence$iterator$1(this);
   };
+  function EmptySequence() {
+    EmptySequence_instance = this;
+  }
+  protoOf(EmptySequence).iterator_jk1svi_k$ = function () {
+    return EmptyIterator_getInstance();
+  };
+  protoOf(EmptySequence).drop_fqkg4y_k$ = function (n) {
+    return EmptySequence_getInstance();
+  };
+  protoOf(EmptySequence).take_fj41k6_k$ = function (n) {
+    return EmptySequence_getInstance();
+  };
+  var EmptySequence_instance;
+  function EmptySequence_getInstance() {
+    if (EmptySequence_instance == null)
+      new EmptySequence();
+    return EmptySequence_instance;
+  }
   function DropTakeSequence() {
   }
-  function generateSequence_0(seedFunction, nextFunction) {
+  function generateSequence_1(seedFunction, nextFunction) {
     return new GeneratorSequence(seedFunction, nextFunction);
   }
   function Sequence_0(iterator) {
@@ -6812,7 +6879,12 @@ if (typeof Math.imul === 'undefined') {
   protoOf(FlatteningSequence).iterator_jk1svi_k$ = function () {
     return new FlatteningSequence$iterator$1(this);
   };
-  function generateSequence$lambda($seed) {
+  function generateSequence$lambda($nextFunction) {
+    return function (it) {
+      return $nextFunction();
+    };
+  }
+  function generateSequence$lambda_0($seed) {
     return function () {
       return $seed;
     };
@@ -8072,6 +8144,20 @@ if (typeof Math.imul === 'undefined') {
   };
   protoOf(OnlyInputTypes).toString = function () {
     return '@kotlin.internal.OnlyInputTypes()';
+  };
+  function AccessibleLateinitPropertyLiteral() {
+  }
+  protoOf(AccessibleLateinitPropertyLiteral).equals = function (other) {
+    if (!(other instanceof AccessibleLateinitPropertyLiteral))
+      return false;
+    var tmp0_other_with_cast = other instanceof AccessibleLateinitPropertyLiteral ? other : THROW_CCE();
+    return true;
+  };
+  protoOf(AccessibleLateinitPropertyLiteral).hashCode = function () {
+    return 0;
+  };
+  protoOf(AccessibleLateinitPropertyLiteral).toString = function () {
+    return '@kotlin.internal.AccessibleLateinitPropertyLiteral()';
   };
   function getProgressionLastElement(start, end, step) {
     var tmp;
@@ -10171,6 +10257,9 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$0 = tmp0_apply;
     return tmp$ret$0.toString();
   }
+  function toIntOrNull(_this__u8e3s4) {
+    return toIntOrNull_0(_this__u8e3s4, 10);
+  }
   function numberFormatError(input) {
     throw NumberFormatException_init_$Create$_0("Invalid number format: '" + input + "'");
   }
@@ -10247,9 +10336,6 @@ if (typeof Math.imul === 'undefined') {
       }
        while (inductionVariable < length);
     return isNegative ? result : result.unaryMinus_6uz0qp_k$();
-  }
-  function toIntOrNull(_this__u8e3s4) {
-    return toIntOrNull_0(_this__u8e3s4, 10);
   }
   function toIntOrNull_0(_this__u8e3s4, radix) {
     checkRadix(radix);
@@ -10405,6 +10491,41 @@ if (typeof Math.imul === 'undefined') {
     var tmp0_elvis_lhs = _this__u8e3s4;
     return tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs;
   }
+  function removeSurrounding(_this__u8e3s4, delimiter) {
+    return removeSurrounding_0(_this__u8e3s4, delimiter, delimiter);
+  }
+  function trim(_this__u8e3s4, chars) {
+    var tmp$ret$2;
+    // Inline function 'kotlin.text.trim' call
+    var tmp$ret$1;
+    // Inline function 'kotlin.text.trim' call
+    var tmp0_trim = isCharSequence(_this__u8e3s4) ? _this__u8e3s4 : THROW_CCE();
+    var startIndex = 0;
+    var endIndex = charSequenceLength(tmp0_trim) - 1 | 0;
+    var startFound = false;
+    $l$loop: while (startIndex <= endIndex) {
+      var index = !startFound ? startIndex : endIndex;
+      var tmp$ret$0;
+      // Inline function 'kotlin.text.trim.<anonymous>' call
+      var tmp1__anonymous__uwfjfc = charSequenceGet(tmp0_trim, index);
+      tmp$ret$0 = contains_4(chars, tmp1__anonymous__uwfjfc);
+      var match = tmp$ret$0;
+      if (!startFound) {
+        if (!match)
+          startFound = true;
+        else
+          startIndex = startIndex + 1 | 0;
+      } else {
+        if (!match)
+          break $l$loop;
+        else
+          endIndex = endIndex - 1 | 0;
+      }
+    }
+    tmp$ret$1 = charSequenceSubSequence(tmp0_trim, startIndex, endIndex + 1 | 0);
+    tmp$ret$2 = toString_5(tmp$ret$1);
+    return tmp$ret$2;
+  }
   function contains_10(_this__u8e3s4, other, ignoreCase) {
     ignoreCase = ignoreCase === VOID ? false : ignoreCase;
     var tmp;
@@ -10414,6 +10535,9 @@ if (typeof Math.imul === 'undefined') {
       tmp = indexOf_10(_this__u8e3s4, other, 0, charSequenceLength(_this__u8e3s4), ignoreCase) >= 0;
     }
     return tmp;
+  }
+  function matches(_this__u8e3s4, regex) {
+    return regex.matches_qvb2fs_k$(_this__u8e3s4);
   }
   function indexOf_8(_this__u8e3s4, string, startIndex, ignoreCase) {
     startIndex = startIndex === VOID ? 0 : startIndex;
@@ -10498,9 +10622,6 @@ if (typeof Math.imul === 'undefined') {
   function padStart(_this__u8e3s4, length, padChar) {
     padChar = padChar === VOID ? _Char___init__impl__6a9atx(32) : padChar;
     return toString_5(padStart_0(isCharSequence(_this__u8e3s4) ? _this__u8e3s4 : THROW_CCE(), length, padChar));
-  }
-  function matches(_this__u8e3s4, regex) {
-    return regex.matches_qvb2fs_k$(_this__u8e3s4);
   }
   function removePrefix(_this__u8e3s4, prefix) {
     if (startsWith(_this__u8e3s4, prefix)) {
@@ -10634,6 +10755,45 @@ if (typeof Math.imul === 'undefined') {
     else {
       return regionMatchesImpl(_this__u8e3s4, charSequenceLength(_this__u8e3s4) - charSequenceLength(suffix) | 0, suffix, 0, charSequenceLength(suffix), ignoreCase);
     }
+  }
+  function removeSurrounding_0(_this__u8e3s4, prefix, suffix) {
+    if ((_this__u8e3s4.length >= (charSequenceLength(prefix) + charSequenceLength(suffix) | 0) ? startsWith(_this__u8e3s4, prefix) : false) ? endsWith_0(_this__u8e3s4, suffix) : false) {
+      var tmp$ret$1;
+      // Inline function 'kotlin.text.substring' call
+      var tmp0_substring = charSequenceLength(prefix);
+      var tmp1_substring = _this__u8e3s4.length - charSequenceLength(suffix) | 0;
+      var tmp$ret$0;
+      // Inline function 'kotlin.js.asDynamic' call
+      tmp$ret$0 = _this__u8e3s4;
+      tmp$ret$1 = tmp$ret$0.substring(tmp0_substring, tmp1_substring);
+      return tmp$ret$1;
+    }
+    return _this__u8e3s4;
+  }
+  function trim_0(_this__u8e3s4, predicate) {
+    var tmp$ret$0;
+    // Inline function 'kotlin.text.trim' call
+    var tmp0_trim = isCharSequence(_this__u8e3s4) ? _this__u8e3s4 : THROW_CCE();
+    var startIndex = 0;
+    var endIndex = charSequenceLength(tmp0_trim) - 1 | 0;
+    var startFound = false;
+    $l$loop: while (startIndex <= endIndex) {
+      var index = !startFound ? startIndex : endIndex;
+      var match = predicate(new Char(charSequenceGet(tmp0_trim, index)));
+      if (!startFound) {
+        if (!match)
+          startFound = true;
+        else
+          startIndex = startIndex + 1 | 0;
+      } else {
+        if (!match)
+          break $l$loop;
+        else
+          endIndex = endIndex - 1 | 0;
+      }
+    }
+    tmp$ret$0 = charSequenceSubSequence(tmp0_trim, startIndex, endIndex + 1 | 0);
+    return toString_5(tmp$ret$0);
   }
   function indexOf_10(_this__u8e3s4, other, startIndex, endIndex, ignoreCase, last) {
     last = last === VOID ? false : last;
@@ -10926,6 +11086,27 @@ if (typeof Math.imul === 'undefined') {
        while (inductionVariable < length);
     return true;
   }
+  function trim_1(_this__u8e3s4, predicate) {
+    var startIndex = 0;
+    var endIndex = charSequenceLength(_this__u8e3s4) - 1 | 0;
+    var startFound = false;
+    $l$loop: while (startIndex <= endIndex) {
+      var index = !startFound ? startIndex : endIndex;
+      var match = predicate(new Char(charSequenceGet(_this__u8e3s4, index)));
+      if (!startFound) {
+        if (!match)
+          startFound = true;
+        else
+          startIndex = startIndex + 1 | 0;
+      } else {
+        if (!match)
+          break $l$loop;
+        else
+          endIndex = endIndex - 1 | 0;
+      }
+    }
+    return charSequenceSubSequence(_this__u8e3s4, startIndex, endIndex + 1 | 0);
+  }
   function lastIndexOf_4(_this__u8e3s4, string, startIndex, ignoreCase) {
     startIndex = startIndex === VOID ? get_lastIndex_8(_this__u8e3s4) : startIndex;
     ignoreCase = ignoreCase === VOID ? false : ignoreCase;
@@ -10978,7 +11159,7 @@ if (typeof Math.imul === 'undefined') {
           var tmp$ret$0;
           // Inline function 'kotlin.text.trimEnd.<anonymous>' call
           var tmp1__anonymous__uwfjfc = charSequenceGet(tmp0_trimEnd, index);
-          tmp$ret$0 = contains_5(chars, tmp1__anonymous__uwfjfc);
+          tmp$ret$0 = contains_4(chars, tmp1__anonymous__uwfjfc);
           if (!tmp$ret$0) {
             tmp$ret$1 = charSequenceSubSequence(tmp0_trimEnd, 0, index + 1 | 0);
             break $l$block;
@@ -11006,7 +11187,7 @@ if (typeof Math.imul === 'undefined') {
           var tmp$ret$0;
           // Inline function 'kotlin.text.trimStart.<anonymous>' call
           var tmp1__anonymous__uwfjfc = charSequenceGet(tmp0_trimStart, index);
-          tmp$ret$0 = contains_5(chars, tmp1__anonymous__uwfjfc);
+          tmp$ret$0 = contains_4(chars, tmp1__anonymous__uwfjfc);
           if (!tmp$ret$0) {
             tmp$ret$1 = charSequenceSubSequence(tmp0_trimStart, index, charSequenceLength(tmp0_trimStart));
             break $l$block;
@@ -11217,6 +11398,9 @@ if (typeof Math.imul === 'undefined') {
     var tmp0_safe_receiver = _this__u8e3s4;
     var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : hashCode_0(tmp0_safe_receiver);
     return tmp1_elvis_lhs == null ? 0 : tmp1_elvis_lhs;
+  }
+  function get_isInitialized(_this__u8e3s4) {
+    throw new NotImplementedError('Implementation is intrinsic');
   }
   function require_0(value) {
     // Inline function 'kotlin.contracts.contract' call
@@ -16260,7 +16444,7 @@ if (typeof Math.imul === 'undefined') {
   function listOf_1(element) {
     return arrayListOf([element]);
   }
-  function mapOf_0(pair) {
+  function mapOf_1(pair) {
     return hashMapOf([pair]);
   }
   function checkIndexOverflow(index) {
@@ -17185,7 +17369,7 @@ if (typeof Math.imul === 'undefined') {
     tmp0_this.set_modCount_ro74zq_k$(tmp1 + 1 | 0);
   };
   protoOf(ArrayList).indexOf_dcv8dt_k$ = function (element) {
-    return indexOf_2(this.array_1, element);
+    return indexOf_3(this.array_1, element);
   };
   protoOf(ArrayList).lastIndexOf_rzx8t5_k$ = function (element) {
     return lastIndexOf(this.array_1, element);
@@ -19458,6 +19642,27 @@ if (typeof Math.imul === 'undefined') {
     tmp$ret$0 = _this__u8e3s4;
     return tmp$ret$0[index];
   }
+  function _set_sequenceRef__afax4j($this, _set____db54di) {
+    $this.sequenceRef_1 = _set____db54di;
+  }
+  function _get_sequenceRef__ubeyip($this) {
+    return $this.sequenceRef_1;
+  }
+  function ConstrainedOnceSequence(sequence) {
+    this.sequenceRef_1 = sequence;
+  }
+  protoOf(ConstrainedOnceSequence).iterator_jk1svi_k$ = function () {
+    var tmp0_elvis_lhs = this.sequenceRef_1;
+    var tmp;
+    if (tmp0_elvis_lhs == null) {
+      throw IllegalStateException_init_$Create$_0('This sequence can be consumed only once.');
+    } else {
+      tmp = tmp0_elvis_lhs;
+    }
+    var sequence = tmp;
+    this.sequenceRef_1 = null;
+    return sequence.iterator_jk1svi_k$();
+  };
   function Appendable() {
   }
   function StringBuilder_init_$Init$(capacity, $this) {
@@ -20125,6 +20330,16 @@ if (typeof Math.imul === 'undefined') {
     }
     return tmp;
   }
+  function toInt(_this__u8e3s4) {
+    var tmp0_elvis_lhs = toIntOrNull(_this__u8e3s4);
+    var tmp;
+    if (tmp0_elvis_lhs == null) {
+      numberFormatError(_this__u8e3s4);
+    } else {
+      tmp = tmp0_elvis_lhs;
+    }
+    return tmp;
+  }
   function isNaN_1(_this__u8e3s4) {
     var tmp$ret$1;
     // Inline function 'kotlin.text.lowercase' call
@@ -20141,16 +20356,6 @@ if (typeof Math.imul === 'undefined') {
       default:
         return false;
     }
-  }
-  function toInt(_this__u8e3s4) {
-    var tmp0_elvis_lhs = toIntOrNull(_this__u8e3s4);
-    var tmp;
-    if (tmp0_elvis_lhs == null) {
-      numberFormatError(_this__u8e3s4);
-    } else {
-      tmp = tmp0_elvis_lhs;
-    }
-    return tmp;
   }
   function digitOf(char, radix) {
     var tmp$ret$1;
@@ -20467,7 +20672,7 @@ if (typeof Math.imul === 'undefined') {
       throw IndexOutOfBoundsException_init_$Create$_0('Start index out of bounds: ' + startIndex + ', input length: ' + charSequenceLength(input));
     }
     var tmp = Regex$findAll$lambda(this, input, startIndex);
-    return generateSequence_0(tmp, Regex$findAll$lambda_0);
+    return generateSequence_1(tmp, Regex$findAll$lambda_0);
   };
   protoOf(Regex).findAll$default_n4kn43_k$ = function (input, startIndex, $super) {
     startIndex = startIndex === VOID ? 0 : startIndex;
@@ -20601,6 +20806,38 @@ if (typeof Math.imul === 'undefined') {
   protoOf(Regex).toString = function () {
     return this.nativePattern_1.toString();
   };
+  function MatchGroup(value) {
+    this.value_1 = value;
+  }
+  protoOf(MatchGroup).get_value_j01efc_k$ = function () {
+    return this.value_1;
+  };
+  protoOf(MatchGroup).component1_7eebsc_k$ = function () {
+    return this.value_1;
+  };
+  protoOf(MatchGroup).copy_3t26ic_k$ = function (value) {
+    return new MatchGroup(value);
+  };
+  protoOf(MatchGroup).copy$default_rfwl1c_k$ = function (value, $super) {
+    value = value === VOID ? this.value_1 : value;
+    return $super === VOID ? this.copy_3t26ic_k$(value) : $super.copy_3t26ic_k$.call(this, value);
+  };
+  protoOf(MatchGroup).toString = function () {
+    return 'MatchGroup(value=' + this.value_1 + ')';
+  };
+  protoOf(MatchGroup).hashCode = function () {
+    return getStringHashCode(this.value_1);
+  };
+  protoOf(MatchGroup).equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof MatchGroup))
+      return false;
+    var tmp0_other_with_cast = other instanceof MatchGroup ? other : THROW_CCE();
+    if (!(this.value_1 === tmp0_other_with_cast.value_1))
+      return false;
+    return true;
+  };
   var RegexOption_IGNORE_CASE_instance;
   var RegexOption_MULTILINE_instance;
   function values_7() {
@@ -20706,38 +20943,6 @@ if (typeof Math.imul === 'undefined') {
     }
     return result.toString();
   }
-  function MatchGroup(value) {
-    this.value_1 = value;
-  }
-  protoOf(MatchGroup).get_value_j01efc_k$ = function () {
-    return this.value_1;
-  };
-  protoOf(MatchGroup).component1_7eebsc_k$ = function () {
-    return this.value_1;
-  };
-  protoOf(MatchGroup).copy_3t26ic_k$ = function (value) {
-    return new MatchGroup(value);
-  };
-  protoOf(MatchGroup).copy$default_rfwl1c_k$ = function (value, $super) {
-    value = value === VOID ? this.value_1 : value;
-    return $super === VOID ? this.copy_3t26ic_k$(value) : $super.copy_3t26ic_k$.call(this, value);
-  };
-  protoOf(MatchGroup).toString = function () {
-    return 'MatchGroup(value=' + this.value_1 + ')';
-  };
-  protoOf(MatchGroup).hashCode = function () {
-    return getStringHashCode(this.value_1);
-  };
-  protoOf(MatchGroup).equals = function (other) {
-    if (this === other)
-      return true;
-    if (!(other instanceof MatchGroup))
-      return false;
-    var tmp0_other_with_cast = other instanceof MatchGroup ? other : THROW_CCE();
-    if (!(this.value_1 === tmp0_other_with_cast.value_1))
-      return false;
-    return true;
-  };
   function readGroupName(_this__u8e3s4, startIndex) {
     var index = startIndex;
     $l$loop: while (index < _this__u8e3s4.length) {
@@ -21559,7 +21764,7 @@ if (typeof Math.imul === 'undefined') {
       var imask = tmp1_elvis_lhs == null ? i.$imask$ : tmp1_elvis_lhs;
       if (!(imask == null)) {
         masks.push(imask);
-        currentSize = imask.intArray_1.length;
+        currentSize = imask.length;
       }
       var iid = i.$metadata$.iid;
       var tmp2_safe_receiver = iid;
@@ -21567,104 +21772,66 @@ if (typeof Math.imul === 'undefined') {
       if (tmp2_safe_receiver == null) {
         tmp = null;
       } else {
-        var tmp$ret$4;
+        var tmp$ret$1;
         // Inline function 'kotlin.let' call
         // Inline function 'kotlin.contracts.contract' call
-        var tmp$ret$3;
-        // Inline function 'kotlin.js.implement.<anonymous>' call
-        var tmp$ret$2;
-        // Inline function 'kotlin.arrayOf' call
-        var tmp$ret$1;
-        // Inline function 'kotlin.js.unsafeCast' call
         var tmp$ret$0;
-        // Inline function 'kotlin.js.asDynamic' call
-        tmp$ret$0 = [tmp2_safe_receiver];
+        // Inline function 'kotlin.js.implement.<anonymous>' call
+        tmp$ret$0 = bitMaskWith(tmp2_safe_receiver);
         tmp$ret$1 = tmp$ret$0;
-        tmp$ret$2 = tmp$ret$1;
-        tmp$ret$3 = new BitMask(tmp$ret$2);
-        tmp$ret$4 = tmp$ret$3;
-        tmp = tmp$ret$4;
+        tmp = tmp$ret$1;
       }
       var iidImask = tmp;
       if (!(iidImask == null)) {
         masks.push(iidImask);
-        currentSize = Math.max(currentSize, iidImask.intArray_1.length);
+        currentSize = Math.max(currentSize, iidImask.length);
       }
       if (currentSize > maxSize) {
         maxSize = currentSize;
       }
     }
-    var tmp_0 = 0;
-    var tmp_1 = maxSize;
-    var tmp_2 = new Int32Array(tmp_1);
-    while (tmp_0 < tmp_1) {
-      var tmp_3 = tmp_0;
-      var tmp$ret$5;
-      // Inline function 'kotlin.js.implement.<anonymous>' call
-      tmp$ret$5 = masks.reduce(implement$lambda(tmp_3), 0);
-      tmp_2[tmp_3] = tmp$ret$5;
-      tmp_0 = tmp_0 + 1 | 0;
-    }
-    var resultIntArray = tmp_2;
-    var tmp$ret$6;
-    // Inline function 'kotlin.emptyArray' call
-    tmp$ret$6 = [];
-    var result = new BitMask(tmp$ret$6);
-    result.intArray_1 = resultIntArray;
-    return result;
+    return compositeBitMask(maxSize, masks);
   }
-  function BitMask(activeBits) {
-    var tmp = this;
-    var tmp$ret$2;
-    // Inline function 'kotlin.run' call
-    // Inline function 'kotlin.contracts.contract' call
-    var tmp$ret$1;
-    // Inline function 'kotlin.js.BitMask.intArray.<anonymous>' call
-    var tmp_0;
-    if (activeBits.length === 0) {
-      tmp_0 = new Int32Array(0);
-    } else {
+  function bitMaskWith(activeBit) {
+    var intArray = new Int32Array((activeBit >> 5) + 1 | 0);
+    var numberIndex = activeBit >> 5;
+    var positionInNumber = activeBit & 31;
+    var numberWithSettledBit = 1 << positionInNumber;
+    intArray[numberIndex] = intArray[numberIndex] | numberWithSettledBit;
+    return intArray;
+  }
+  function compositeBitMask(capacity, masks) {
+    var tmp = 0;
+    var tmp_0 = capacity;
+    var tmp_1 = new Int32Array(tmp_0);
+    while (tmp < tmp_0) {
+      var tmp_2 = tmp;
       var tmp$ret$0;
-      // Inline function 'kotlin.js.asDynamic' call
-      var tmp0_asDynamic = Math;
-      tmp$ret$0 = tmp0_asDynamic;
-      var max = tmp$ret$0.max.apply(null, activeBits);
-      var intArray = new Int32Array((max >> 5) + 1 | 0);
-      var indexedObject = activeBits;
+      // Inline function 'kotlin.js.compositeBitMask.<anonymous>' call
+      var result = 0;
+      var indexedObject = masks;
       var inductionVariable = 0;
       var last = indexedObject.length;
       while (inductionVariable < last) {
-        var activeBit = indexedObject[inductionVariable];
+        var mask = indexedObject[inductionVariable];
         inductionVariable = inductionVariable + 1 | 0;
-        var numberIndex = activeBit >> 5;
-        var positionInNumber = activeBit & 31;
-        var numberWithSettledBit = 1 << positionInNumber;
-        intArray[numberIndex] = intArray[numberIndex] | numberWithSettledBit;
+        if (tmp_2 < mask.length) {
+          result = result | mask[tmp_2];
+        }
       }
-      tmp_0 = intArray;
+      tmp$ret$0 = result;
+      tmp_1[tmp_2] = tmp$ret$0;
+      tmp = tmp + 1 | 0;
     }
-    tmp$ret$1 = tmp_0;
-    tmp$ret$2 = tmp$ret$1;
-    tmp.intArray_1 = tmp$ret$2;
+    return tmp_1;
   }
-  protoOf(BitMask).set_intArray_k7nz4i_k$ = function (_set____db54di) {
-    this.intArray_1 = _set____db54di;
-  };
-  protoOf(BitMask).get_intArray_mx4dcd_k$ = function () {
-    return this.intArray_1;
-  };
-  protoOf(BitMask).isBitSet_inz3k2_k$ = function (possibleActiveBit) {
+  function isBitSet(_this__u8e3s4, possibleActiveBit) {
     var numberIndex = possibleActiveBit >> 5;
-    if (numberIndex > this.intArray_1.length)
+    if (numberIndex > _this__u8e3s4.length)
       return false;
     var positionInNumber = possibleActiveBit & 31;
     var numberWithSettledBit = 1 << positionInNumber;
-    return !((this.intArray_1[numberIndex] & numberWithSettledBit) === 0);
-  };
-  function implement$lambda($tmp) {
-    return function (acc, it) {
-      return $tmp >= it.intArray_1.length ? acc : acc | it.intArray_1[$tmp];
-    };
+    return !((_this__u8e3s4[numberIndex] & numberWithSettledBit) === 0);
   }
   function DefaultConstructorMarker() {
     DefaultConstructorMarker_instance = this;
@@ -23592,7 +23759,22 @@ if (typeof Math.imul === 'undefined') {
   function getInterfaceMaskFor(obj, superType) {
     _init_properties_reflectRuntime_kt__5r4uu3();
     var tmp0_elvis_lhs = obj.$imask$;
-    return tmp0_elvis_lhs == null ? implement([superType]) : tmp0_elvis_lhs;
+    var tmp;
+    if (tmp0_elvis_lhs == null) {
+      var tmp$ret$2;
+      // Inline function 'kotlin.arrayOf' call
+      var tmp$ret$1;
+      // Inline function 'kotlin.js.unsafeCast' call
+      var tmp$ret$0;
+      // Inline function 'kotlin.js.asDynamic' call
+      tmp$ret$0 = [superType];
+      tmp$ret$1 = tmp$ret$0;
+      tmp$ret$2 = tmp$ret$1;
+      tmp = implement(tmp$ret$2);
+    } else {
+      tmp = tmp0_elvis_lhs;
+    }
+    return tmp;
   }
   function getLocalDelegateReference(name, superType, mutable, lambda) {
     _init_properties_reflectRuntime_kt__5r4uu3();
@@ -23687,7 +23869,7 @@ if (typeof Math.imul === 'undefined') {
     ctor.$metadata$ = metadata;
     if (!(interfaces == null)) {
       var receiver = !(metadata.iid == null) ? ctor : ctor.prototype;
-      receiver.$imask$ = implement(interfaces.slice());
+      receiver.$imask$ = implement(interfaces);
     }
   }
   function isInterface(obj, iface) {
@@ -23706,7 +23888,7 @@ if (typeof Math.imul === 'undefined') {
       tmp = tmp0_elvis_lhs;
     }
     var mask = tmp;
-    return mask.isBitSet_inz3k2_k$(iface);
+    return isBitSet(mask, iface);
   }
   function isArray(obj) {
     var tmp;
@@ -23868,29 +24050,41 @@ if (typeof Math.imul === 'undefined') {
     return tmp$ret$0;
   }
   function interfaceMeta(name, associatedObjectKey, associatedObjects, suspendArity) {
-    return createMetadata('interface', name, associatedObjectKey, associatedObjects, suspendArity, generateInterfaceId(InterfaceIdService_getInstance()));
+    return createMetadata('interface', name, associatedObjectKey, associatedObjects, suspendArity, generateInterfaceId());
   }
-  function generateInterfaceId(_this__u8e3s4) {
-    var tmp0_this = _this__u8e3s4;
-    tmp0_this.iid_1 = tmp0_this.iid_1 + 1 | 0;
-    return _this__u8e3s4.iid_1;
+  function generateInterfaceId() {
+    if (!!(iid == null)) {
+      iid = 0;
+    }
+    var tmp$ret$1;
+    // Inline function 'kotlin.js.unsafeCast' call
+    var tmp0_unsafeCast = get_iid();
+    var tmp$ret$0;
+    // Inline function 'kotlin.js.asDynamic' call
+    tmp$ret$0 = tmp0_unsafeCast;
+    tmp$ret$1 = tmp$ret$0;
+    iid = tmp$ret$1 + 1 | 0;
+    var tmp$ret$3;
+    // Inline function 'kotlin.js.unsafeCast' call
+    var tmp1_unsafeCast = get_iid();
+    var tmp$ret$2;
+    // Inline function 'kotlin.js.asDynamic' call
+    tmp$ret$2 = tmp1_unsafeCast;
+    tmp$ret$3 = tmp$ret$2;
+    return tmp$ret$3;
   }
-  function InterfaceIdService() {
-    InterfaceIdService_instance = this;
-    this.iid_1 = 0;
+  function set_iid(_set____db54di) {
+    iid = _set____db54di;
   }
-  protoOf(InterfaceIdService).set_iid_ctnmnd_k$ = function (_set____db54di) {
-    this.iid_1 = _set____db54di;
-  };
-  protoOf(InterfaceIdService).get_iid_18j3mt_k$ = function () {
-    return this.iid_1;
-  };
-  var InterfaceIdService_instance;
-  function InterfaceIdService_getInstance() {
-    if (InterfaceIdService_instance == null)
-      new InterfaceIdService();
-    return InterfaceIdService_instance;
+  function get_iid() {
+    var tmp = iid;
+    if (!(tmp == null))
+      return tmp;
+    else {
+      throwUninitializedPropertyAccessException('iid');
+    }
   }
+  var iid;
   function objectMeta(name, associatedObjectKey, associatedObjects, suspendArity) {
     return createMetadata('object', name, associatedObjectKey, associatedObjects, suspendArity, null);
   }
@@ -25381,188 +25575,202 @@ if (typeof Math.imul === 'undefined') {
   _.$_$.m2 = ShortCompanionObject_getInstance;
   _.$_$.n2 = Default_getInstance_0;
   _.$_$.o2 = PrimitiveClasses_getInstance;
-  _.$_$.p2 = Companion_getInstance;
-  _.$_$.q2 = Companion_getInstance_24;
-  _.$_$.r2 = Companion_getInstance_15;
-  _.$_$.s2 = Companion_getInstance_16;
-  _.$_$.t2 = Companion_getInstance_19;
-  _.$_$.u2 = Companion_getInstance_22;
-  _.$_$.v2 = Unit_getInstance;
-  _.$_$.w2 = Collection;
-  _.$_$.x2 = Iterable;
-  _.$_$.y2 = Iterator_3;
-  _.$_$.z2 = List;
-  _.$_$.a3 = Map;
-  _.$_$.b3 = MutableList;
-  _.$_$.c3 = MutableMap;
-  _.$_$.d3 = addAll;
-  _.$_$.e3 = arrayCopy;
-  _.$_$.f3 = checkCountOverflow;
-  _.$_$.g3 = checkIndexOverflow;
-  _.$_$.h3 = chunked;
-  _.$_$.i3 = collectionSizeOrDefault;
-  _.$_$.j3 = contentEquals_0;
-  _.$_$.k3 = contentEquals;
-  _.$_$.l3 = copyOfRange_2;
-  _.$_$.m3 = copyOfRange_1;
-  _.$_$.n3 = copyOf_1;
-  _.$_$.o3 = copyToArray;
-  _.$_$.p3 = dropLast;
-  _.$_$.q3 = drop;
-  _.$_$.r3 = emptyList;
-  _.$_$.s3 = emptyMap;
-  _.$_$.t3 = firstOrNull_0;
-  _.$_$.u3 = firstOrNull_1;
-  _.$_$.v3 = first;
-  _.$_$.w3 = flatten;
-  _.$_$.x3 = getOrNull_0;
-  _.$_$.y3 = get_indices;
-  _.$_$.z3 = get_indices_6;
-  _.$_$.a4 = joinToString_0;
-  _.$_$.b4 = get_lastIndex_0;
-  _.$_$.c4 = get_lastIndex;
-  _.$_$.d4 = lastOrNull_0;
-  _.$_$.e4 = last;
-  _.$_$.f4 = listOfNotNull_0;
-  _.$_$.g4 = listOfNotNull;
-  _.$_$.h4 = listOf_1;
-  _.$_$.i4 = listOf;
-  _.$_$.j4 = mapCapacity;
-  _.$_$.k4 = mapOf_0;
-  _.$_$.l4 = mutableMapOf_0;
-  _.$_$.m4 = mutableSetOf_0;
-  _.$_$.n4 = plus_1;
-  _.$_$.o4 = retainAll;
-  _.$_$.p4 = reversedArray;
-  _.$_$.q4 = reversed;
-  _.$_$.r4 = reversed_3;
-  _.$_$.s4 = singleOrNull;
-  _.$_$.t4 = slice_0;
-  _.$_$.u4 = slice;
-  _.$_$.v4 = sortedWith;
-  _.$_$.w4 = takeLast;
-  _.$_$.x4 = take_2;
-  _.$_$.y4 = take_3;
-  _.$_$.z4 = toList_2;
-  _.$_$.a5 = toList_0;
-  _.$_$.b5 = toList_1;
-  _.$_$.c5 = toList;
-  _.$_$.d5 = toMutableList_1;
-  _.$_$.e5 = toMutableMap;
-  _.$_$.f5 = toMutableSet;
-  _.$_$.g5 = toSet;
-  _.$_$.h5 = toUByteArray_0;
-  _.$_$.i5 = toUIntArray;
-  _.$_$.j5 = toULongArray;
-  _.$_$.k5 = withIndex;
-  _.$_$.l5 = withIndex_0;
-  _.$_$.m5 = zip;
-  _.$_$.n5 = compareValues;
-  _.$_$.o5 = minOf;
-  _.$_$.p5 = println;
-  _.$_$.q5 = readln;
-  _.$_$.r5 = captureStack;
-  _.$_$.s5 = charArrayOf_0;
-  _.$_$.t5 = charSequenceGet;
-  _.$_$.u5 = charSequenceLength;
-  _.$_$.v5 = classMeta;
-  _.$_$.w5 = compareTo_0;
-  _.$_$.x5 = equals_0;
-  _.$_$.y5 = getStringHashCode;
-  _.$_$.z5 = hashCode_0;
-  _.$_$.a6 = interfaceMeta;
-  _.$_$.b6 = isCharSequence;
-  _.$_$.c6 = isInterface;
-  _.$_$.d6 = isNumber;
-  _.$_$.e6 = isObject;
-  _.$_$.f6 = longArrayOf_0;
-  _.$_$.g6 = longArray;
-  _.$_$.h6 = numberRangeToNumber;
-  _.$_$.i6 = numberToChar;
-  _.$_$.j6 = numberToDouble;
-  _.$_$.k6 = numberToInt;
-  _.$_$.l6 = numberToLong;
-  _.$_$.m6 = objectCreate;
-  _.$_$.n6 = objectMeta;
-  _.$_$.o6 = protoOf;
-  _.$_$.p6 = setMetadataFor;
-  _.$_$.q6 = toByte;
-  _.$_$.r6 = toLong_0;
-  _.$_$.s6 = toShort;
-  _.$_$.t6 = toString_5;
-  _.$_$.u6 = get_E;
-  _.$_$.v6 = get_PI;
-  _.$_$.w6 = abs_0;
-  _.$_$.x6 = abs;
-  _.$_$.y6 = log;
-  _.$_$.z6 = contains;
-  _.$_$.a7 = isEmpty;
-  _.$_$.b7 = ClosedRange;
-  _.$_$.c7 = coerceAtLeast;
-  _.$_$.d7 = until;
-  _.$_$.e7 = generateSequence;
-  _.$_$.f7 = toList_3;
-  _.$_$.g7 = contains_10;
-  _.$_$.h7 = contains_9;
-  _.$_$.i7 = digitToInt;
-  _.$_$.j7 = endsWith;
-  _.$_$.k7 = endsWith_1;
-  _.$_$.l7 = first_2;
-  _.$_$.m7 = getOrNull_1;
-  _.$_$.n7 = indexOfAny;
-  _.$_$.o7 = indexOf_8;
-  _.$_$.p7 = isUpperCase;
-  _.$_$.q7 = get_lastIndex_8;
-  _.$_$.r7 = padStart;
-  _.$_$.s7 = removePrefix;
-  _.$_$.t7 = removeSuffix;
-  _.$_$.u7 = repeat_0;
-  _.$_$.v7 = replace;
-  _.$_$.w7 = reversed_2;
-  _.$_$.x7 = split;
-  _.$_$.y7 = split_0;
-  _.$_$.z7 = substring;
-  _.$_$.a8 = toBooleanStrict;
-  _.$_$.b8 = toCharArray;
-  _.$_$.c8 = toDouble;
-  _.$_$.d8 = toLong;
-  _.$_$.e8 = toString_3;
-  _.$_$.f8 = toString_4;
-  _.$_$.g8 = toString_2;
-  _.$_$.h8 = trimIndent;
-  _.$_$.i8 = ArithmeticException;
-  _.$_$.j8 = Char;
-  _.$_$.k8 = Comparable;
-  _.$_$.l8 = Comparator;
-  _.$_$.m8 = Enum;
-  _.$_$.n8 = Exception;
-  _.$_$.o8 = Long;
-  _.$_$.p8 = NotImplementedError;
-  _.$_$.q8 = Pair;
-  _.$_$.r8 = THROW_CCE;
-  _.$_$.s8 = THROW_ISE;
-  _.$_$.t8 = Triple;
-  _.$_$.u8 = UByteArray;
-  _.$_$.v8 = UByte;
-  _.$_$.w8 = UIntArray;
-  _.$_$.x8 = UInt;
-  _.$_$.y8 = ULongArray;
-  _.$_$.z8 = ULong;
-  _.$_$.a9 = UShort;
-  _.$_$.b9 = ensureNotNull;
-  _.$_$.c9 = noWhenBranchMatchedException;
-  _.$_$.d9 = printStackTrace;
-  _.$_$.e9 = stackTraceToString;
-  _.$_$.f9 = throwUninitializedPropertyAccessException;
-  _.$_$.g9 = toString_0;
-  _.$_$.h9 = to;
-  _.$_$.i9 = uintCompare;
-  _.$_$.j9 = uintDivide;
-  _.$_$.k9 = uintRemainder;
-  _.$_$.l9 = ulongCompare;
-  _.$_$.m9 = ulongDivide;
-  _.$_$.n9 = ulongRemainder;
-  _.$_$.o9 = VOID;
+  _.$_$.p2 = Companion_getInstance_23;
+  _.$_$.q2 = Companion_getInstance;
+  _.$_$.r2 = Companion_getInstance_24;
+  _.$_$.s2 = Companion_getInstance_15;
+  _.$_$.t2 = Companion_getInstance_16;
+  _.$_$.u2 = Companion_getInstance_19;
+  _.$_$.v2 = Companion_getInstance_22;
+  _.$_$.w2 = Unit_getInstance;
+  _.$_$.x2 = Collection;
+  _.$_$.y2 = Iterable;
+  _.$_$.z2 = Iterator_3;
+  _.$_$.a3 = List;
+  _.$_$.b3 = Map;
+  _.$_$.c3 = MutableList;
+  _.$_$.d3 = MutableMap;
+  _.$_$.e3 = MutableSet;
+  _.$_$.f3 = Set;
+  _.$_$.g3 = addAll;
+  _.$_$.h3 = arrayCopy;
+  _.$_$.i3 = checkCountOverflow;
+  _.$_$.j3 = checkIndexOverflow;
+  _.$_$.k3 = chunked;
+  _.$_$.l3 = collectionSizeOrDefault;
+  _.$_$.m3 = contentEquals_0;
+  _.$_$.n3 = contentEquals;
+  _.$_$.o3 = copyOfRange_2;
+  _.$_$.p3 = copyOfRange_1;
+  _.$_$.q3 = copyOf_1;
+  _.$_$.r3 = copyToArray;
+  _.$_$.s3 = dropLast;
+  _.$_$.t3 = drop;
+  _.$_$.u3 = emptyList;
+  _.$_$.v3 = emptyMap;
+  _.$_$.w3 = firstOrNull_0;
+  _.$_$.x3 = first;
+  _.$_$.y3 = flatten;
+  _.$_$.z3 = getOrNull_0;
+  _.$_$.a4 = get_indices;
+  _.$_$.b4 = get_indices_6;
+  _.$_$.c4 = intersect;
+  _.$_$.d4 = joinToString_0;
+  _.$_$.e4 = get_lastIndex_0;
+  _.$_$.f4 = get_lastIndex;
+  _.$_$.g4 = get_lastIndex_7;
+  _.$_$.h4 = lastOrNull_0;
+  _.$_$.i4 = last;
+  _.$_$.j4 = listOfNotNull_0;
+  _.$_$.k4 = listOfNotNull;
+  _.$_$.l4 = listOf_1;
+  _.$_$.m4 = listOf;
+  _.$_$.n4 = mapCapacity;
+  _.$_$.o4 = mapOf_1;
+  _.$_$.p4 = mapOf_0;
+  _.$_$.q4 = minus;
+  _.$_$.r4 = mutableMapOf_0;
+  _.$_$.s4 = mutableSetOf_0;
+  _.$_$.t4 = plus_1;
+  _.$_$.u4 = retainAll;
+  _.$_$.v4 = reversedArray;
+  _.$_$.w4 = reversed;
+  _.$_$.x4 = reversed_3;
+  _.$_$.y4 = singleOrNull;
+  _.$_$.z4 = slice_0;
+  _.$_$.a5 = slice;
+  _.$_$.b5 = sortedWith;
+  _.$_$.c5 = takeLast;
+  _.$_$.d5 = take_2;
+  _.$_$.e5 = take_3;
+  _.$_$.f5 = toList_2;
+  _.$_$.g5 = toList_0;
+  _.$_$.h5 = toList_1;
+  _.$_$.i5 = toList;
+  _.$_$.j5 = toMutableList_1;
+  _.$_$.k5 = toMutableMap;
+  _.$_$.l5 = toMutableSet;
+  _.$_$.m5 = toSet;
+  _.$_$.n5 = toUByteArray_0;
+  _.$_$.o5 = toUIntArray;
+  _.$_$.p5 = toULongArray;
+  _.$_$.q5 = union;
+  _.$_$.r5 = withIndex;
+  _.$_$.s5 = withIndex_0;
+  _.$_$.t5 = zip;
+  _.$_$.u5 = compareValues;
+  _.$_$.v5 = minOf;
+  _.$_$.w5 = println;
+  _.$_$.x5 = readln;
+  _.$_$.y5 = captureStack;
+  _.$_$.z5 = charArrayOf_0;
+  _.$_$.a6 = charSequenceGet;
+  _.$_$.b6 = charSequenceLength;
+  _.$_$.c6 = classMeta;
+  _.$_$.d6 = compareTo_0;
+  _.$_$.e6 = equals_0;
+  _.$_$.f6 = getStringHashCode;
+  _.$_$.g6 = hashCode_0;
+  _.$_$.h6 = interfaceMeta;
+  _.$_$.i6 = isCharSequence;
+  _.$_$.j6 = isComparable;
+  _.$_$.k6 = isInterface;
+  _.$_$.l6 = isNumber;
+  _.$_$.m6 = isObject;
+  _.$_$.n6 = longArrayOf_0;
+  _.$_$.o6 = longArray;
+  _.$_$.p6 = numberRangeToNumber;
+  _.$_$.q6 = numberToChar;
+  _.$_$.r6 = numberToDouble;
+  _.$_$.s6 = numberToInt;
+  _.$_$.t6 = numberToLong;
+  _.$_$.u6 = objectCreate;
+  _.$_$.v6 = objectMeta;
+  _.$_$.w6 = protoOf;
+  _.$_$.x6 = setMetadataFor;
+  _.$_$.y6 = toByte;
+  _.$_$.z6 = toLong_0;
+  _.$_$.a7 = toShort;
+  _.$_$.b7 = toString_5;
+  _.$_$.c7 = get_E;
+  _.$_$.d7 = get_PI;
+  _.$_$.e7 = abs_0;
+  _.$_$.f7 = abs;
+  _.$_$.g7 = log;
+  _.$_$.h7 = contains;
+  _.$_$.i7 = isEmpty;
+  _.$_$.j7 = ClosedRange;
+  _.$_$.k7 = coerceAtLeast;
+  _.$_$.l7 = until;
+  _.$_$.m7 = generateSequence_0;
+  _.$_$.n7 = generateSequence;
+  _.$_$.o7 = toList_3;
+  _.$_$.p7 = Regex;
+  _.$_$.q7 = contains_10;
+  _.$_$.r7 = contains_9;
+  _.$_$.s7 = digitToInt;
+  _.$_$.t7 = endsWith;
+  _.$_$.u7 = endsWith_1;
+  _.$_$.v7 = first_2;
+  _.$_$.w7 = getOrNull_1;
+  _.$_$.x7 = indexOfAny;
+  _.$_$.y7 = indexOf_8;
+  _.$_$.z7 = isUpperCase;
+  _.$_$.a8 = get_lastIndex_8;
+  _.$_$.b8 = padStart;
+  _.$_$.c8 = removePrefix;
+  _.$_$.d8 = removeSuffix;
+  _.$_$.e8 = removeSurrounding;
+  _.$_$.f8 = repeat_0;
+  _.$_$.g8 = replace;
+  _.$_$.h8 = reversed_2;
+  _.$_$.i8 = split;
+  _.$_$.j8 = split_0;
+  _.$_$.k8 = substring;
+  _.$_$.l8 = toBooleanStrict;
+  _.$_$.m8 = toCharArray;
+  _.$_$.n8 = toDouble;
+  _.$_$.o8 = toIntOrNull;
+  _.$_$.p8 = toInt;
+  _.$_$.q8 = toLong;
+  _.$_$.r8 = toString_3;
+  _.$_$.s8 = toString_4;
+  _.$_$.t8 = toString_2;
+  _.$_$.u8 = trimIndent;
+  _.$_$.v8 = trim;
+  _.$_$.w8 = ArithmeticException;
+  _.$_$.x8 = Char;
+  _.$_$.y8 = Comparable;
+  _.$_$.z8 = Comparator;
+  _.$_$.a9 = Enum;
+  _.$_$.b9 = Exception;
+  _.$_$.c9 = Long;
+  _.$_$.d9 = NotImplementedError;
+  _.$_$.e9 = Pair;
+  _.$_$.f9 = THROW_CCE;
+  _.$_$.g9 = THROW_ISE;
+  _.$_$.h9 = Triple;
+  _.$_$.i9 = UByteArray;
+  _.$_$.j9 = UByte;
+  _.$_$.k9 = UIntArray;
+  _.$_$.l9 = UInt;
+  _.$_$.m9 = ULongArray;
+  _.$_$.n9 = ULong;
+  _.$_$.o9 = UShort;
+  _.$_$.p9 = ensureNotNull;
+  _.$_$.q9 = noWhenBranchMatchedException;
+  _.$_$.r9 = printStackTrace;
+  _.$_$.s9 = stackTraceToString;
+  _.$_$.t9 = throwUninitializedPropertyAccessException;
+  _.$_$.u9 = toString_0;
+  _.$_$.v9 = to;
+  _.$_$.w9 = uintCompare;
+  _.$_$.x9 = uintDivide;
+  _.$_$.y9 = uintRemainder;
+  _.$_$.z9 = ulongCompare;
+  _.$_$.aa = ulongDivide;
+  _.$_$.ba = ulongRemainder;
+  _.$_$.ca = VOID;
   //endregion
   return _;
 }));

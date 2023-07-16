@@ -82,7 +82,11 @@
 <script>
   let editor;
   const output = document.getElementById("output");
-  output.value = "";
+  output.value = [
+    `Running Rhovas v0.0.1: https://github.com/Rhovas/Interpreter/releases/tag/v0.0.1`,
+    `If you notice any bugs, please open an issue on GitHub.`,
+    `If you have any questions/feedback, join our Discord server.`,
+  ].join("\n");
   window.rhovas = rhovas;
 
   require.config({paths: {vs: "monaco"}});
